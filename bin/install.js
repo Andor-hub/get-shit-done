@@ -2432,13 +2432,29 @@ function install(isGlobal, runtime = 'claude') {
     const leakedPaths = [];
     function scanForLeakedPaths(dir) {
       if (!fs.existsSync(dir)) return;
-      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      let entries;
+      try {
+        entries = fs.readdirSync(dir, { withFileTypes: true });
+      } catch (err) {
+        if (err.code === 'EPERM' || err.code === 'EACCES') {
+          return; // skip inaccessible directories
+        }
+        throw err;
+      }
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory()) {
           scanForLeakedPaths(fullPath);
         } else if ((entry.name.endsWith('.md') || entry.name.endsWith('.toml')) && entry.name !== 'CHANGELOG.md') {
-          const content = fs.readFileSync(fullPath, 'utf8');
+          let content;
+          try {
+            content = fs.readFileSync(fullPath, 'utf8');
+          } catch (err) {
+            if (err.code === 'EPERM' || err.code === 'EACCES') {
+              continue; // skip inaccessible files
+            }
+            throw err;
+          }
           const matches = content.match(/(?:~|\$HOME)\/\.claude\b/g);
           if (matches) {
             leakedPaths.push({ file: fullPath.replace(targetDir + '/', ''), count: matches.length });
