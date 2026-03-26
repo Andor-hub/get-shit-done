@@ -1,0 +1,744 @@
+/**
+ * Phase Runner — core state machine driving the full phase lifecycle.
+ *
+ * Orchestrates: discuss → research → plan → execute → verify → advance
+ * with config-driven step skipping, human gate callbacks, event emission,
+ * and structured error handling per step.
+ */
+
+import type {
+  PhaseOpInfo,
+  PhaseStepResult,
+  PhaseRunnerResult,
+  HumanGateCallbacks,
+  PhaseRunnerOptions,
+  PlanResult,
+  SessionOptions,
+  ParsedPlan,
+} from './types.js';
+import { PhaseStepType, PhaseType, GSDEventType } from './types.js';
+import type { GSDConfig } from './config.js';
+import type { GSDTools } from './gsd-tools.js';
+import type { GSDEventStream } from './event-stream.js';
+import type { PromptFactory } from './phase-prompt.js';
+import type { ContextEngine } from './context-engine.js';
+import type { GSDLogger } from './logger.js';
+import { runPhaseStepSession, runPlanSession } from './session-runner.js';
+
+// ─── Error type ──────────────────────────────────────────────────────────────
+
+export class PhaseRunnerError extends Error {
+  constructor(
+    message: string,
+    public readonly phaseNumber: string,
+    public readonly step: PhaseStepType,
+    public readonly cause?: Error,
+  ) {
+    super(message);
+    this.name = 'PhaseRunnerError';
+  }
+}
+
+// ─── Verification result enum ────────────────────────────────────────────────
+
+export type VerificationOutcome = 'passed' | 'human_needed' | 'gaps_found';
+
+// ─── PhaseRunner deps interface ──────────────────────────────────────────────
+
+export interface PhaseRunnerDeps {
+  projectDir: string;
+  tools: GSDTools;
+  promptFactory: PromptFactory;
+  contextEngine: ContextEngine;
+  eventStream: GSDEventStream;
+  config: GSDConfig;
+  logger?: GSDLogger;
+}
+
+// ─── PhaseRunner ─────────────────────────────────────────────────────────────
+
+export class PhaseRunner {
+  private readonly projectDir: string;
+  private readonly tools: GSDTools;
+  private readonly promptFactory: PromptFactory;
+  private readonly contextEngine: ContextEngine;
+  private readonly eventStream: GSDEventStream;
+  private readonly config: GSDConfig;
+  private readonly logger?: GSDLogger;
+
+  constructor(deps: PhaseRunnerDeps) {
+    this.projectDir = deps.projectDir;
+    this.tools = deps.tools;
+    this.promptFactory = deps.promptFactory;
+    this.contextEngine = deps.contextEngine;
+    this.eventStream = deps.eventStream;
+    this.config = deps.config;
+    this.logger = deps.logger;
+  }
+
+  /**
+   * Run a full phase lifecycle: discuss → research → plan → execute → verify → advance.
+   *
+   * Each step is gated by config flags and phase state. Human gate callbacks
+   * are invoked at decision points; when not provided, auto-approve is used.
+   */
+  async run(phaseNumber: string, options?: PhaseRunnerOptions): Promise<PhaseRunnerResult> {
+    const startTime = Date.now();
+    const steps: PhaseStepResult[] = [];
+    const callbacks = options?.callbacks ?? {};
+
+    // ── Init: query phase state ──
+    let phaseOp: PhaseOpInfo;
+    try {
+      phaseOp = await this.tools.initPhaseOp(phaseNumber);
+    } catch (err) {
+      throw new PhaseRunnerError(
+        `Failed to initialize phase ${phaseNumber}: ${err instanceof Error ? err.message : String(err)}`,
+        phaseNumber,
+        PhaseStepType.Discuss,
+        err instanceof Error ? err : undefined,
+      );
+    }
+
+    // Validate phase exists
+    if (!phaseOp.phase_found) {
+      throw new PhaseRunnerError(
+        `Phase ${phaseNumber} not found on disk`,
+        phaseNumber,
+        PhaseStepType.Discuss,
+      );
+    }
+
+    const phaseName = phaseOp.phase_name;
+
+    // Emit phase_start
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStart,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      phaseName,
+    });
+
+    const sessionOpts: SessionOptions = {
+      maxTurns: options?.maxTurnsPerStep ?? 50,
+      maxBudgetUsd: options?.maxBudgetPerStep ?? 5.0,
+      model: options?.model,
+      cwd: this.projectDir,
+    };
+
+    let halted = false;
+
+    // ── Step 1: Discuss ──
+    if (!halted) {
+      const shouldSkip = phaseOp.has_context || this.config.workflow.skip_discuss;
+      if (shouldSkip) {
+        this.logger?.debug(`Skipping discuss: has_context=${phaseOp.has_context}, skip_discuss=${this.config.workflow.skip_discuss}`);
+      } else {
+        const result = await this.runStep(PhaseStepType.Discuss, phaseNumber, sessionOpts);
+        steps.push(result);
+
+        // Re-query phase state to check if context was created
+        try {
+          phaseOp = await this.tools.initPhaseOp(phaseNumber);
+        } catch {
+          // If re-query fails, proceed with original state
+        }
+
+        if (!phaseOp.has_context) {
+          // No context after discuss — invoke blocker callback
+          const decision = await this.invokeBlockerCallback(callbacks, phaseNumber, PhaseStepType.Discuss, 'No context after discuss step');
+          if (decision === 'stop') {
+            halted = true;
+          }
+        }
+      }
+    }
+
+    // ── Step 2: Research ──
+    if (!halted) {
+      if (!this.config.workflow.research) {
+        this.logger?.debug('Skipping research: config.workflow.research=false');
+      } else {
+        const result = await this.runStep(PhaseStepType.Research, phaseNumber, sessionOpts);
+        steps.push(result);
+      }
+    }
+
+    // ── Step 3: Plan ──
+    if (!halted) {
+      const result = await this.runStep(PhaseStepType.Plan, phaseNumber, sessionOpts);
+      steps.push(result);
+
+      // Re-query to check for plans
+      try {
+        phaseOp = await this.tools.initPhaseOp(phaseNumber);
+      } catch {
+        // Proceed with prior state
+      }
+
+      if (!phaseOp.has_plans || phaseOp.plan_count === 0) {
+        const decision = await this.invokeBlockerCallback(callbacks, phaseNumber, PhaseStepType.Plan, 'No plans created after plan step');
+        if (decision === 'stop') {
+          halted = true;
+        }
+      }
+    }
+
+    // ── Step 4: Execute ──
+    if (!halted) {
+      const executeResult = await this.runExecuteStep(phaseNumber, phaseOp, sessionOpts);
+      steps.push(executeResult);
+    }
+
+    // ── Step 5: Verify ──
+    if (!halted) {
+      if (!this.config.workflow.verifier) {
+        this.logger?.debug('Skipping verify: config.workflow.verifier=false');
+      } else {
+        const verifyResult = await this.runVerifyStep(phaseNumber, sessionOpts, callbacks);
+        steps.push(verifyResult);
+
+        // Check if verify resulted in a halt
+        if (!verifyResult.success && verifyResult.error === 'halted_by_callback') {
+          halted = true;
+        }
+      }
+    }
+
+    // ── Step 6: Advance ──
+    if (!halted) {
+      const advanceResult = await this.runAdvanceStep(phaseNumber, sessionOpts, callbacks);
+      steps.push(advanceResult);
+    }
+
+    const totalDurationMs = Date.now() - startTime;
+    const totalCostUsd = steps.reduce((sum, s) => {
+      const stepCost = s.planResults?.reduce((c, pr) => c + pr.totalCostUsd, 0) ?? 0;
+      return sum + stepCost;
+    }, 0);
+    const success = !halted && steps.every(s => s.success);
+
+    // Emit phase_complete
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseComplete,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      phaseName,
+      success,
+      totalCostUsd,
+      totalDurationMs,
+      stepsCompleted: steps.length,
+    });
+
+    return {
+      phaseNumber,
+      phaseName,
+      steps,
+      success,
+      totalCostUsd,
+      totalDurationMs,
+    };
+  }
+
+  // ─── Step runners ──────────────────────────────────────────────────────
+
+  /**
+   * Run a single phase step session (discuss, research, plan).
+   * Emits step start/complete events and captures errors.
+   */
+  private async runStep(
+    step: PhaseStepType,
+    phaseNumber: string,
+    sessionOpts: SessionOptions,
+  ): Promise<PhaseStepResult> {
+    const stepStart = Date.now();
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepStart,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      step,
+    });
+
+    let planResult: PlanResult;
+    try {
+      // Map step to PhaseType for prompt/context resolution
+      const phaseType = this.stepToPhaseType(step);
+      const contextFiles = await this.contextEngine.resolveContextFiles(phaseType);
+      const prompt = await this.promptFactory.buildPrompt(phaseType, null, contextFiles);
+
+      planResult = await runPhaseStepSession(
+        prompt,
+        step,
+        this.config,
+        sessionOpts,
+        this.eventStream,
+        { phase: phaseType, planName: undefined },
+      );
+    } catch (err) {
+      const durationMs = Date.now() - stepStart;
+      const errorMsg = err instanceof Error ? err.message : String(err);
+
+      this.eventStream.emitEvent({
+        type: GSDEventType.PhaseStepComplete,
+        timestamp: new Date().toISOString(),
+        sessionId: '',
+        phaseNumber,
+        step,
+        success: false,
+        durationMs,
+        error: errorMsg,
+      });
+
+      return {
+        step,
+        success: false,
+        durationMs,
+        error: errorMsg,
+      };
+    }
+
+    const durationMs = Date.now() - stepStart;
+    const success = planResult.success;
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepComplete,
+      timestamp: new Date().toISOString(),
+      sessionId: planResult.sessionId,
+      phaseNumber,
+      step,
+      success,
+      durationMs,
+      error: planResult.error?.messages.join('; '),
+    });
+
+    return {
+      step,
+      success,
+      durationMs,
+      error: planResult.error?.messages.join('; '),
+      planResults: [planResult],
+    };
+  }
+
+  /**
+   * Run the execute step — iterates plans sequentially.
+   * Designed so S04 can swap in parallel execution.
+   */
+  private async runExecuteStep(
+    phaseNumber: string,
+    phaseOp: PhaseOpInfo,
+    sessionOpts: SessionOptions,
+  ): Promise<PhaseStepResult> {
+    const stepStart = Date.now();
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepStart,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      step: PhaseStepType.Execute,
+    });
+
+    const planResults: PlanResult[] = [];
+    const planCount = phaseOp.plan_count;
+
+    if (planCount === 0) {
+      // No plans to execute — still a valid step result
+      const durationMs = Date.now() - stepStart;
+      this.eventStream.emitEvent({
+        type: GSDEventType.PhaseStepComplete,
+        timestamp: new Date().toISOString(),
+        sessionId: '',
+        phaseNumber,
+        step: PhaseStepType.Execute,
+        success: true,
+        durationMs,
+      });
+      return {
+        step: PhaseStepType.Execute,
+        success: true,
+        durationMs,
+        planResults: [],
+      };
+    }
+
+    // Iterate plans sequentially — for S04 this becomes parallel
+    for (let i = 0; i < planCount; i++) {
+      try {
+        const phaseType = PhaseType.Execute;
+        const contextFiles = await this.contextEngine.resolveContextFiles(phaseType);
+        const prompt = await this.promptFactory.buildPrompt(phaseType, null, contextFiles);
+
+        const result = await runPhaseStepSession(
+          prompt,
+          PhaseStepType.Execute,
+          this.config,
+          sessionOpts,
+          this.eventStream,
+          { phase: phaseType, planName: `plan-${i + 1}` },
+        );
+        planResults.push(result);
+      } catch (err) {
+        planResults.push({
+          success: false,
+          sessionId: '',
+          totalCostUsd: 0,
+          durationMs: 0,
+          usage: { inputTokens: 0, outputTokens: 0, cacheReadInputTokens: 0, cacheCreationInputTokens: 0 },
+          numTurns: 0,
+          error: {
+            subtype: 'error_during_execution',
+            messages: [err instanceof Error ? err.message : String(err)],
+          },
+        });
+      }
+    }
+
+    const durationMs = Date.now() - stepStart;
+    const allSucceeded = planResults.every(r => r.success);
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepComplete,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      step: PhaseStepType.Execute,
+      success: allSucceeded,
+      durationMs,
+    });
+
+    return {
+      step: PhaseStepType.Execute,
+      success: allSucceeded,
+      durationMs,
+      planResults,
+    };
+  }
+
+  /**
+   * Run the verify step with gap closure routing.
+   * Verification outcome routing:
+   * - passed → proceed to advance
+   * - human_needed → invoke onVerificationReview callback
+   * - gaps_found → retry once (gap closure), then advance or stop
+   */
+  private async runVerifyStep(
+    phaseNumber: string,
+    sessionOpts: SessionOptions,
+    callbacks: HumanGateCallbacks,
+  ): Promise<PhaseStepResult> {
+    const stepStart = Date.now();
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepStart,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      step: PhaseStepType.Verify,
+    });
+
+    const maxGapRetries = 1;
+    let gapRetryCount = 0;
+    let lastResult: PlanResult | undefined;
+    let outcome: VerificationOutcome = 'passed';
+
+    while (true) {
+      try {
+        const phaseType = PhaseType.Verify;
+        const contextFiles = await this.contextEngine.resolveContextFiles(phaseType);
+        const prompt = await this.promptFactory.buildPrompt(phaseType, null, contextFiles);
+
+        lastResult = await runPhaseStepSession(
+          prompt,
+          PhaseStepType.Verify,
+          this.config,
+          sessionOpts,
+          this.eventStream,
+          { phase: phaseType },
+        );
+      } catch (err) {
+        const durationMs = Date.now() - stepStart;
+        const errorMsg = err instanceof Error ? err.message : String(err);
+
+        this.eventStream.emitEvent({
+          type: GSDEventType.PhaseStepComplete,
+          timestamp: new Date().toISOString(),
+          sessionId: '',
+          phaseNumber,
+          step: PhaseStepType.Verify,
+          success: false,
+          durationMs,
+          error: errorMsg,
+        });
+
+        return {
+          step: PhaseStepType.Verify,
+          success: false,
+          durationMs,
+          error: errorMsg,
+        };
+      }
+
+      // Parse verification outcome from session result
+      outcome = this.parseVerificationOutcome(lastResult);
+
+      if (outcome === 'passed') {
+        break;
+      }
+
+      if (outcome === 'human_needed') {
+        // Invoke verification review callback
+        const decision = await this.invokeVerificationCallback(callbacks, phaseNumber, {
+          step: PhaseStepType.Verify,
+          success: lastResult.success,
+          durationMs: Date.now() - stepStart,
+          planResults: [lastResult],
+        });
+
+        if (decision === 'accept') {
+          break; // Treat as passed
+        } else if (decision === 'retry' && gapRetryCount < maxGapRetries) {
+          gapRetryCount++;
+          continue;
+        } else {
+          // reject or exceeded retries
+          const durationMs = Date.now() - stepStart;
+          this.eventStream.emitEvent({
+            type: GSDEventType.PhaseStepComplete,
+            timestamp: new Date().toISOString(),
+            sessionId: lastResult.sessionId,
+            phaseNumber,
+            step: PhaseStepType.Verify,
+            success: false,
+            durationMs,
+            error: 'halted_by_callback',
+          });
+          return {
+            step: PhaseStepType.Verify,
+            success: false,
+            durationMs,
+            error: 'halted_by_callback',
+            planResults: [lastResult],
+          };
+        }
+      }
+
+      if (outcome === 'gaps_found') {
+        if (gapRetryCount < maxGapRetries) {
+          gapRetryCount++;
+          this.logger?.info(`Gap closure retry ${gapRetryCount}/${maxGapRetries} for phase ${phaseNumber}`);
+          continue;
+        }
+        // Exceeded gap closure retries — proceed
+        break;
+      }
+
+      break; // Safety: unknown outcome → proceed
+    }
+
+    const durationMs = Date.now() - stepStart;
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepComplete,
+      timestamp: new Date().toISOString(),
+      sessionId: lastResult?.sessionId ?? '',
+      phaseNumber,
+      step: PhaseStepType.Verify,
+      success: true,
+      durationMs,
+    });
+
+    return {
+      step: PhaseStepType.Verify,
+      success: true,
+      durationMs,
+      planResults: lastResult ? [lastResult] : [],
+    };
+  }
+
+  /**
+   * Run the advance step — mark phase complete.
+   * Gated by config.workflow.auto_advance or callback approval.
+   */
+  private async runAdvanceStep(
+    phaseNumber: string,
+    _sessionOpts: SessionOptions,
+    callbacks: HumanGateCallbacks,
+  ): Promise<PhaseStepResult> {
+    const stepStart = Date.now();
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepStart,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      step: PhaseStepType.Advance,
+    });
+
+    // Check if auto_advance or callback approves
+    let shouldAdvance = this.config.workflow.auto_advance;
+
+    if (!shouldAdvance && callbacks.onBlockerDecision) {
+      try {
+        const decision = await callbacks.onBlockerDecision({
+          phaseNumber,
+          step: PhaseStepType.Advance,
+          error: undefined,
+        });
+        shouldAdvance = decision !== 'stop';
+      } catch (err) {
+        this.logger?.warn(`Advance callback threw, auto-approving: ${err instanceof Error ? err.message : String(err)}`);
+        shouldAdvance = true; // Auto-approve on callback error
+      }
+    } else if (!shouldAdvance) {
+      // No callback, auto-approve
+      shouldAdvance = true;
+    }
+
+    if (!shouldAdvance) {
+      const durationMs = Date.now() - stepStart;
+      this.eventStream.emitEvent({
+        type: GSDEventType.PhaseStepComplete,
+        timestamp: new Date().toISOString(),
+        sessionId: '',
+        phaseNumber,
+        step: PhaseStepType.Advance,
+        success: false,
+        durationMs,
+        error: 'advance_rejected',
+      });
+      return {
+        step: PhaseStepType.Advance,
+        success: false,
+        durationMs,
+        error: 'advance_rejected',
+      };
+    }
+
+    try {
+      await this.tools.phaseComplete(phaseNumber);
+    } catch (err) {
+      const durationMs = Date.now() - stepStart;
+      const errorMsg = err instanceof Error ? err.message : String(err);
+
+      this.eventStream.emitEvent({
+        type: GSDEventType.PhaseStepComplete,
+        timestamp: new Date().toISOString(),
+        sessionId: '',
+        phaseNumber,
+        step: PhaseStepType.Advance,
+        success: false,
+        durationMs,
+        error: errorMsg,
+      });
+
+      return {
+        step: PhaseStepType.Advance,
+        success: false,
+        durationMs,
+        error: errorMsg,
+      };
+    }
+
+    const durationMs = Date.now() - stepStart;
+
+    this.eventStream.emitEvent({
+      type: GSDEventType.PhaseStepComplete,
+      timestamp: new Date().toISOString(),
+      sessionId: '',
+      phaseNumber,
+      step: PhaseStepType.Advance,
+      success: true,
+      durationMs,
+    });
+
+    return {
+      step: PhaseStepType.Advance,
+      success: true,
+      durationMs,
+    };
+  }
+
+  // ─── Helpers ───────────────────────────────────────────────────────────
+
+  /**
+   * Map PhaseStepType to PhaseType for prompt/context resolution.
+   */
+  private stepToPhaseType(step: PhaseStepType): PhaseType {
+    const mapping: Record<string, PhaseType> = {
+      [PhaseStepType.Discuss]: PhaseType.Discuss,
+      [PhaseStepType.Research]: PhaseType.Research,
+      [PhaseStepType.Plan]: PhaseType.Plan,
+      [PhaseStepType.Execute]: PhaseType.Execute,
+      [PhaseStepType.Verify]: PhaseType.Verify,
+    };
+    return mapping[step] ?? PhaseType.Execute;
+  }
+
+  /**
+   * Parse the verification outcome from a PlanResult.
+   * In a real implementation, this would parse the session output for
+   * structured verification signals. For now, map from success/error.
+   */
+  private parseVerificationOutcome(result: PlanResult): VerificationOutcome {
+    if (result.success) return 'passed';
+    if (result.error?.subtype === 'human_review_needed') return 'human_needed';
+    return 'gaps_found';
+  }
+
+  /**
+   * Invoke the onBlockerDecision callback, falling back to auto-approve.
+   */
+  private async invokeBlockerCallback(
+    callbacks: HumanGateCallbacks,
+    phaseNumber: string,
+    step: PhaseStepType,
+    error?: string,
+  ): Promise<'retry' | 'skip' | 'stop'> {
+    if (!callbacks.onBlockerDecision) {
+      return 'skip'; // Auto-approve: skip the blocker
+    }
+
+    try {
+      const decision = await callbacks.onBlockerDecision({ phaseNumber, step, error });
+      // Validate return value
+      if (decision === 'retry' || decision === 'skip' || decision === 'stop') {
+        return decision;
+      }
+      this.logger?.warn(`Unexpected blocker callback return value: ${String(decision)}, falling back to skip`);
+      return 'skip';
+    } catch (err) {
+      this.logger?.warn(`Blocker callback threw, auto-approving: ${err instanceof Error ? err.message : String(err)}`);
+      return 'skip'; // Auto-approve on error
+    }
+  }
+
+  /**
+   * Invoke the onVerificationReview callback, falling back to auto-accept.
+   */
+  private async invokeVerificationCallback(
+    callbacks: HumanGateCallbacks,
+    phaseNumber: string,
+    stepResult: PhaseStepResult,
+  ): Promise<'accept' | 'reject' | 'retry'> {
+    if (!callbacks.onVerificationReview) {
+      return 'accept'; // Auto-approve
+    }
+
+    try {
+      const decision = await callbacks.onVerificationReview({ phaseNumber, stepResult });
+      if (decision === 'accept' || decision === 'reject' || decision === 'retry') {
+        return decision;
+      }
+      this.logger?.warn(`Unexpected verification callback return value: ${String(decision)}, falling back to accept`);
+      return 'accept';
+    } catch (err) {
+      this.logger?.warn(`Verification callback threw, auto-accepting: ${err instanceof Error ? err.message : String(err)}`);
+      return 'accept'; // Auto-approve on error
+    }
+  }
+}
