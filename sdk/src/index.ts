@@ -23,13 +23,16 @@ import { readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { homedir } from 'node:os';
 
-import type { GSDOptions, PlanResult, SessionOptions, GSDEvent, TransportHandler } from './types.js';
+import type { GSDOptions, PlanResult, SessionOptions, GSDEvent, TransportHandler, PhaseRunnerOptions, PhaseRunnerResult } from './types.js';
 import { parsePlan, parsePlanFile } from './plan-parser.js';
 import { loadConfig } from './config.js';
 import { GSDTools } from './gsd-tools.js';
 import { runPlanSession } from './session-runner.js';
 import { buildExecutorPrompt, parseAgentTools } from './prompt-builder.js';
 import { GSDEventStream } from './event-stream.js';
+import { PhaseRunner } from './phase-runner.js';
+import { ContextEngine } from './context-engine.js';
+import { PromptFactory } from './phase-prompt.js';
 
 // ─── GSD class ───────────────────────────────────────────────────────────────
 
@@ -116,6 +119,34 @@ export class GSD {
   }
 
   /**
+   * Run a full phase lifecycle: discuss → research → plan → execute → verify → advance.
+   *
+   * Creates the necessary collaborators (GSDTools, PromptFactory, ContextEngine),
+   * loads project config, instantiates a PhaseRunner, and delegates to `runner.run()`.
+   *
+   * @param phaseNumber - The phase number to execute (e.g. "01", "02")
+   * @param options - Per-phase overrides for budget, turns, model, and callbacks
+   * @returns PhaseRunnerResult with per-step results, overall success, cost, and timing
+   */
+  async runPhase(phaseNumber: string, options?: PhaseRunnerOptions): Promise<PhaseRunnerResult> {
+    const tools = this.createTools();
+    const promptFactory = new PromptFactory();
+    const contextEngine = new ContextEngine(this.projectDir);
+    const config = await loadConfig(this.projectDir);
+
+    const runner = new PhaseRunner({
+      projectDir: this.projectDir,
+      tools,
+      promptFactory,
+      contextEngine,
+      eventStream: this.eventStream,
+      config,
+    });
+
+    return runner.run(phaseNumber, options);
+  }
+
+  /**
    * Load the gsd-executor agent definition if available.
    * Falls back gracefully — returns undefined if not found.
    */
@@ -156,3 +187,7 @@ export { getToolsForPhase, PHASE_AGENT_MAP, PHASE_DEFAULT_TOOLS } from './tool-s
 export { PromptFactory, extractBlock, extractSteps, PHASE_WORKFLOW_MAP } from './phase-prompt.js';
 export { GSDLogger } from './logger.js';
 export type { LogLevel, LogEntry, GSDLoggerOptions } from './logger.js';
+
+// S03: Phase lifecycle state machine
+export { PhaseRunner, PhaseRunnerError } from './phase-runner.js';
+export type { PhaseRunnerDeps, VerificationOutcome } from './phase-runner.js';

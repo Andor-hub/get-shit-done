@@ -312,14 +312,14 @@ export class PhaseRunner {
       step,
       success,
       durationMs,
-      error: planResult.error?.messages.join('; '),
+      error: planResult.error?.messages.join('; ') || undefined,
     });
 
     return {
       step,
       success,
       durationMs,
-      error: planResult.error?.messages.join('; '),
+      error: planResult.error?.messages.join('; ') || undefined,
       planResults: [planResult],
     };
   }
