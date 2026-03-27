@@ -239,6 +239,7 @@ function stepTypeToPhaseType(step: PhaseStepType): PhaseType {
     discuss: PhaseType.Discuss,
     research: PhaseType.Research,
     plan: PhaseType.Plan,
+    plan_check: PhaseType.Verify,
     execute: PhaseType.Execute,
     verify: PhaseType.Verify,
   };

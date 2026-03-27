@@ -31,9 +31,9 @@ describe('Phase lifecycle types', () => {
       expect(PhaseStepType.Advance).toBe('advance');
     });
 
-    it('has exactly 6 members', () => {
+    it('has exactly 7 members', () => {
       const values = Object.values(PhaseStepType);
-      expect(values).toHaveLength(6);
+      expect(values).toHaveLength(7);
     });
   });
 

@@ -772,6 +772,7 @@ export enum PhaseStepType {
   Discuss = 'discuss',
   Research = 'research',
   Plan = 'plan',
+  PlanCheck = 'plan_check',
   Execute = 'execute',
   Verify = 'verify',
   Advance = 'advance',
