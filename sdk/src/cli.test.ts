@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { parseCliArgs, resolveInitInput, type ParsedCliArgs } from './cli.js';
+import { parseCliArgs, resolveInitInput, USAGE, type ParsedCliArgs } from './cli.js';
 import { mkdir, writeFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -152,6 +152,52 @@ describe('parseCliArgs', () => {
     expect(result.initInput).toBeUndefined();
     expect(result.prompt).toBe('build auth');
   });
+
+  // ─── Auto command parsing ──────────────────────────────────────────────
+
+  it('parses auto command with no prompt', () => {
+    const result = parseCliArgs(['auto']);
+
+    expect(result.command).toBe('auto');
+    expect(result.prompt).toBeUndefined();
+    expect(result.initInput).toBeUndefined();
+  });
+
+  it('parses auto with --project-dir', () => {
+    const result = parseCliArgs(['auto', '--project-dir', '/tmp/x']);
+
+    expect(result.command).toBe('auto');
+    expect(result.projectDir).toBe('/tmp/x');
+  });
+
+  it('parses auto with --ws-port', () => {
+    const result = parseCliArgs(['auto', '--ws-port', '9090']);
+
+    expect(result.command).toBe('auto');
+    expect(result.wsPort).toBe(9090);
+  });
+
+  it('parses auto with all options combined', () => {
+    const result = parseCliArgs([
+      'auto',
+      '--project-dir', '/tmp/proj',
+      '--ws-port', '8080',
+      '--model', 'claude-sonnet-4-6',
+      '--max-budget', '20',
+    ]);
+
+    expect(result.command).toBe('auto');
+    expect(result.projectDir).toBe('/tmp/proj');
+    expect(result.wsPort).toBe(8080);
+    expect(result.model).toBe('claude-sonnet-4-6');
+    expect(result.maxBudget).toBe(20);
+  });
+
+  it('auto command does not set initInput', () => {
+    const result = parseCliArgs(['auto']);
+
+    expect(result.initInput).toBeUndefined();
+  });
 });
 
 // ─── resolveInitInput tests ──────────────────────────────────────────────────
@@ -248,5 +294,17 @@ describe('resolveInitInput', () => {
     const result = await resolveInitInput(makeArgs({ initInput: '@large.md' }));
 
     expect(result).toBe(largeContent);
+  });
+});
+
+// ─── USAGE text tests ────────────────────────────────────────────────────────
+
+describe('USAGE', () => {
+  it('includes auto command', () => {
+    expect(USAGE).toContain('auto');
+  });
+
+  it('describes auto as autonomous lifecycle', () => {
+    expect(USAGE).toMatch(/auto\s+.*autonomous/i);
   });
 });

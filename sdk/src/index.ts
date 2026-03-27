@@ -43,6 +43,7 @@ export class GSD {
   private readonly defaultModel?: string;
   private readonly defaultMaxBudgetUsd: number;
   private readonly defaultMaxTurns: number;
+  private readonly autoMode: boolean;
   readonly eventStream: GSDEventStream;
 
   constructor(options: GSDOptions) {
@@ -53,6 +54,7 @@ export class GSD {
     this.defaultModel = options.model;
     this.defaultMaxBudgetUsd = options.maxBudgetUsd ?? 5.0;
     this.defaultMaxTurns = options.maxTurns ?? 50;
+    this.autoMode = options.autoMode ?? false;
     this.eventStream = new GSDEventStream();
   }
 
@@ -134,6 +136,12 @@ export class GSD {
     const promptFactory = new PromptFactory();
     const contextEngine = new ContextEngine(this.projectDir);
     const config = await loadConfig(this.projectDir);
+
+    // Auto mode: force auto_advance on and skip_discuss off so self-discuss kicks in
+    if (this.autoMode) {
+      config.workflow.auto_advance = true;
+      config.workflow.skip_discuss = false;
+    }
 
     const runner = new PhaseRunner({
       projectDir: this.projectDir,

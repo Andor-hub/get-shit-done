@@ -72,11 +72,12 @@ export function parseCliArgs(argv: string[]): ParsedCliArgs {
 
 // ─── Usage ───────────────────────────────────────────────────────────────────
 
-const USAGE = `
+export const USAGE = `
 Usage: gsd-sdk <command> [args] [options]
 
 Commands:
   run <prompt>          Run a full milestone from a text prompt
+  auto                  Run the full autonomous lifecycle (discover → execute → advance)
   init [input]          Bootstrap a new project from a PRD or description
                         input can be:
                           @path/to/prd.md   Read input from a file
@@ -187,8 +188,8 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     return;
   }
 
-  if (args.command !== 'run' && args.command !== 'init') {
-    console.error('Error: Expected "gsd-sdk run <prompt>" or "gsd-sdk init [input]"');
+  if (args.command !== 'run' && args.command !== 'init' && args.command !== 'auto') {
+    console.error('Error: Expected "gsd-sdk run <prompt>", "gsd-sdk auto", or "gsd-sdk init [input]"');
     console.error(USAGE);
     process.exitCode = 1;
     return;
@@ -268,6 +269,53 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
             console.error(`  ✗ ${step.step}: ${step.error}`);
           }
         }
+        process.exitCode = 1;
+      }
+    } catch (err) {
+      console.error(`Fatal error: ${(err as Error).message}`);
+      process.exitCode = 1;
+    } finally {
+      cliTransport.close();
+      if (wsTransport) {
+        wsTransport.close();
+      }
+    }
+    return;
+  }
+
+  // ─── Auto command ─────────────────────────────────────────────────────────
+  if (args.command === 'auto') {
+    const gsd = new GSD({
+      projectDir: args.projectDir,
+      model: args.model,
+      maxBudgetUsd: args.maxBudget,
+      autoMode: true,
+    });
+
+    // Wire CLI transport (always active)
+    const cliTransport = new CLITransport();
+    gsd.addTransport(cliTransport);
+
+    // Optional WebSocket transport
+    let wsTransport: WSTransport | undefined;
+    if (args.wsPort !== undefined) {
+      wsTransport = new WSTransport({ port: args.wsPort });
+      await wsTransport.start();
+      gsd.addTransport(wsTransport);
+      console.log(`WebSocket transport listening on port ${args.wsPort}`);
+    }
+
+    try {
+      const result = await gsd.run('');
+
+      // Final summary
+      const status = result.success ? 'SUCCESS' : 'FAILED';
+      const phases = result.phases.length;
+      const cost = result.totalCostUsd.toFixed(2);
+      const duration = (result.totalDurationMs / 1000).toFixed(1);
+      console.log(`\n[${status}] ${phases} phase(s), $${cost}, ${duration}s`);
+
+      if (!result.success) {
         process.exitCode = 1;
       }
     } catch (err) {

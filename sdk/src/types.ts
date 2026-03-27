@@ -205,6 +205,8 @@ export interface GSDOptions {
   maxBudgetUsd?: number;
   /** Maximum turns per plan execution. Default: 50. */
   maxTurns?: number;
+  /** Enable auto mode: sets auto_advance=true, skip_discuss=false in workflow config. */
+  autoMode?: boolean;
 }
 
 // ─── S02: Event stream types ─────────────────────────────────────────────────
