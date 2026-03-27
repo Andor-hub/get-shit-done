@@ -116,9 +116,12 @@ describe('PromptFactory', () => {
   });
 
   function makeFactory(): PromptFactory {
+    // sdkPromptsDir points to a non-existent temp subdir so real sdk/prompts/ files
+    // don't interfere — tests control exactly which files exist on disk.
     return new PromptFactory({
       gsdInstallDir: tempDir,
       agentsDir,
+      sdkPromptsDir: join(tempDir, 'sdk-prompts-does-not-exist'),
     });
   }
 
@@ -365,6 +368,7 @@ describe('PromptFactory', () => {
         gsdInstallDir: tempDir,
         agentsDir,
         projectAgentsDir,
+        sdkPromptsDir: join(tempDir, 'sdk-prompts-does-not-exist'),
       });
 
       const content = await factory.loadAgentDef(PhaseType.Execute);
@@ -381,6 +385,7 @@ describe('PromptFactory', () => {
         gsdInstallDir: tempDir,
         agentsDir,
         projectAgentsDir,
+        sdkPromptsDir: join(tempDir, 'sdk-prompts-does-not-exist'),
       });
 
       const content = await factory.loadAgentDef(PhaseType.Execute);
