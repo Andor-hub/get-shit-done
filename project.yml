@@ -1,0 +1,53 @@
+name: HabitX
+options:
+  bundleIdPrefix: com.habitx
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.3"
+  defaultConfig: Debug
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+targets:
+  HabitX:
+    type: application
+    platform: iOS
+    sources:
+      - path: HabitX/HabitX
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
+        CODE_SIGN_ENTITLEMENTS: HabitX/HabitX/HabitX.entitlements
+    entitlements:
+      path: HabitX/HabitX/HabitX.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.habitx.shared
+  HabitXWidget:
+    type: app-extension
+    platform: iOS
+    product: HabitXWidget
+    sources:
+      - path: HabitX/HabitXWidget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app.widget
+        GENERATE_INFOPLIST_FILE: true
+        CODE_SIGN_ENTITLEMENTS: HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements
+        INFOPLIST_KEY_CFBundleDisplayName: HabitXWidget
+        INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.habitx.shared
+    dependencies:
+      - target: HabitX
+        embed: false
+        link: false
