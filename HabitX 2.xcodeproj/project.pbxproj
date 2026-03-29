@@ -7,16 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17C942000E6C2866378F5651 /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */; };
 		1AA3530FD86DD3FA506E9B2B /* HabitXWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC1AF864C49E76C428BA6F3 /* HabitXWidget.swift */; };
-		2C3159434E2B67255FEFE1F8 /* HabitSchemaV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */; };
 		2E9CDE850A18A9140BE8DA7C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B5CAB7C0C322E00193D4A /* ContentView.swift */; };
-		376A28C09F5FC3C6F3DC23AE /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
-		5DF4B4B89F7BE73B9C55003A /* HabitSchemaV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */; };
 		91DA0AC9A8EBE9544E4FF141 /* HabitXWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */; };
 		ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */; };
-		C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
-		FC993CAE54F64F3924496B0A /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,18 +24,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSchemaV1.swift; sourceTree = "<group>"; };
 		277B5CAB7C0C322E00193D4A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4989BB6243283147700E739D /* HabitX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitX.entitlements; sourceTree = "<group>"; };
-		5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMigrationPlan.swift; sourceTree = "<group>"; };
-		5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
-		62DD186929896A99F418A443 /* HabitX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		62DD186929896A99F418A443 /* HabitX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HabitX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXApp.swift; sourceTree = "<group>"; };
 		9F319A4E4E97884DCF211DE0 /* HabitXWidgetEntitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitXWidgetEntitlements.entitlements; sourceTree = "<group>"; };
-		D084E4432F79B52D00D9F879 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBC1AF864C49E76C428BA6F3 /* HabitXWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXWidget.swift; sourceTree = "<group>"; };
 		F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXWidgetBundle.swift; sourceTree = "<group>"; };
-		F397B4299497C72457793240 /* HabitXWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitXWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F397B4299497C72457793240 /* HabitXWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HabitXWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -52,15 +42,6 @@
 				F397B4299497C72457793240 /* HabitXWidget.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A783F54425480938B38B6C79 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */,
-				E41CF5846200A902E2825405 /* Schema */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		C95E25FA6E627B61D48E5121 /* HabitXWidget */ = {
@@ -74,23 +55,12 @@
 			path = HabitX/HabitXWidget;
 			sourceTree = "<group>";
 		};
-		E41CF5846200A902E2825405 /* Schema */ = {
-			isa = PBXGroup;
-			children = (
-				5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */,
-				16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */,
-			);
-			path = Schema;
-			sourceTree = "<group>";
-		};
 		ED35F51620CB8C041AA549D7 /* HabitX */ = {
 			isa = PBXGroup;
 			children = (
 				277B5CAB7C0C322E00193D4A /* ContentView.swift */,
 				4989BB6243283147700E739D /* HabitX.entitlements */,
 				76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */,
-				A783F54425480938B38B6C79 /* Models */,
-				D084E4432F79B52D00D9F879 /* Assets.xcassets */,
 			);
 			name = HabitX;
 			path = HabitX/HabitX;
@@ -150,7 +120,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 4E4050CF720A62110C1C444F /* Build configuration list for PBXProject "HabitX" */;
 			developmentRegion = en;
@@ -178,10 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E9CDE850A18A9140BE8DA7C /* ContentView.swift in Sources */,
-				376A28C09F5FC3C6F3DC23AE /* HabitMigrationPlan.swift in Sources */,
-				2C3159434E2B67255FEFE1F8 /* HabitSchemaV1.swift in Sources */,
 				ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */,
-				17C942000E6C2866378F5651 /* SharedModelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,11 +158,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */,
-				5DF4B4B89F7BE73B9C55003A /* HabitSchemaV1.swift in Sources */,
 				1AA3530FD86DD3FA506E9B2B /* HabitXWidget.swift in Sources */,
 				91DA0AC9A8EBE9544E4FF141 /* HabitXWidgetBundle.swift in Sources */,
-				FC993CAE54F64F3924496B0A /* SharedModelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,21 +178,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -268,10 +230,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = VHGHKM4538;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -292,7 +252,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -304,7 +263,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = HabitXWidget;
 				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
@@ -313,7 +271,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -324,7 +281,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = HabitXWidget;
 				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
@@ -333,7 +289,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,21 +299,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -400,10 +351,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VHGHKM4538;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -417,7 +366,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
