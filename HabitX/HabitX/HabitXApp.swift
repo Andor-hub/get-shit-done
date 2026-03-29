@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct HabitXApp: App {
@@ -6,5 +7,6 @@ struct HabitXApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(SharedModelContainer.container)
     }
 }

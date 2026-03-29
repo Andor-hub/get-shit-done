@@ -1,5 +1,6 @@
 import WidgetKit
 import SwiftUI
+import SwiftData
 
 struct HabitWidgetEntry: TimelineEntry {
     let date: Date
@@ -35,6 +36,7 @@ struct HabitXWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: HabitTimelineProvider()) { entry in
             HabitXWidgetEntryView(entry: entry)
+                .modelContainer(SharedModelContainer.container)
         }
         .configurationDisplayName("HabitX")
         .description("Track your daily habits.")
