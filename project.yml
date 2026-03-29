@@ -35,6 +35,7 @@ targets:
     product: HabitXWidget
     sources:
       - path: HabitX/HabitXWidget
+      - path: HabitX/HabitX/Models
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app.widget
