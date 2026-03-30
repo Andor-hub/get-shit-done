@@ -21,13 +21,13 @@ struct HabitTemplatePickerView: View {
                         title: "Protein",
                         subtitle: "150g daily target, input type",
                         systemImage: "fork.knife",
-                        habit: createHabit(from: .proteinTemplate, sortOrder: habitCount)
+                        template: .proteinTemplate
                     )
                     templateRow(
                         title: "Water",
                         subtitle: "8 cups daily target, count type",
                         systemImage: "drop",
-                        habit: createHabit(from: .waterTemplate, sortOrder: habitCount)
+                        template: .waterTemplate
                     )
                 } header: {
                     Text("Templates")
@@ -62,9 +62,6 @@ struct HabitTemplatePickerView: View {
                 if let habit = pendingHabit {
                     HabitFormView(habit: habit, isNew: true)
                         .onDisappear {
-                            // If the form saved, dismiss the picker too
-                            // The form inserts into context, so we detect it by checking
-                            // if the habit has a non-empty name after dismissal
                             if !habit.name.isEmpty && habit.modelContext != nil {
                                 dismiss()
                             }
@@ -79,9 +76,11 @@ struct HabitTemplatePickerView: View {
         title: String,
         subtitle: String,
         systemImage: String,
-        habit: HabitSchemaV1.Habit
+        template: HabitTemplate
     ) -> some View {
         Button {
+            // Create the habit on tap, not during view body evaluation
+            let habit = createHabit(from: template, sortOrder: habitCount)
             pendingHabit = habit
             showingForm = true
         } label: {
