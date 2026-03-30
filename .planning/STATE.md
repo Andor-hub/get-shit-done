@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 01-foundation/01-02-PLAN.md — SwiftData schema, migration plan, and shared container wired into both targets
-last_updated: "2026-03-29T00:11:14.142Z"
-last_activity: 2026-03-29
+status: executing
+stopped_at: Completed 02-core-app/02-01-PLAN.md — data services, stats calculator, habit defaults, and 27 unit tests
+last_updated: "2026-03-30T03:31:46.889Z"
+last_activity: 2026-03-30
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 6
+  completed_plans: 3
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** Logging a habit is so frictionless — one tap from the home screen — that it becomes a reflex, not a chore.
-**Current focus:** Phase 01 — foundation
+**Current focus:** Phase 02 — core-app
 
 ## Current Position
 
-Phase: 01 (foundation) — EXECUTING
-Plan: 2 of 2
-Status: Phase complete — ready for verification
-Last activity: 2026-03-29
+Phase: 02 (core-app) — EXECUTING
+Plan: 2 of 4
+Status: Ready to execute
+Last activity: 2026-03-30
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -54,6 +54,7 @@ Progress: [░░░░░░░░░░] 0%
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 15 | 2 tasks | 9 files |
 | Phase 01-foundation P02 | 10 | 2 tasks | 6 files |
+| Phase 02-core-app P01 | 30 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: xcodeVersion 16.3 pinned in project.yml — App Store requires Xcode 16+ per CLAUDE.md stack requirement
 - [Phase 01-foundation]: import Foundation required in HabitSchemaV1.swift — SwiftData does not re-export Foundation; @Model macro expansion needs UUID and Date
 - [Phase 01-foundation]: xcodebuild -target with -sdk iphonesimulator required for build verification — xcodegen auto-generated schemes do not associate with simulator destinations properly
+- [Phase 02-core-app]: HabitLogService static enum pattern — no instance state; ModelContext passed per call for thread safety
+- [Phase 02-core-app]: SharedModelContainer falls back to default store when App Group not provisioned — enables unit tests without entitlements
 
 ### Pending Todos
 
@@ -84,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-29T00:11:14.137Z
-Stopped at: Completed 01-foundation/01-02-PLAN.md — SwiftData schema, migration plan, and shared container wired into both targets
+Last session: 2026-03-30T03:31:46.885Z
+Stopped at: Completed 02-core-app/02-01-PLAN.md — data services, stats calculator, habit defaults, and 27 unit tests
 Resume file: None
