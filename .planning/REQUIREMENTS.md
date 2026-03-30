@@ -22,11 +22,11 @@
 
 ### Widgets
 
-- [ ] **WID-01**: Each habit has a configurable home screen widget that shows today's progress toward its daily target
-- [ ] **WID-02**: Boolean habit widget: tap to toggle done/undone (interactive)
-- [ ] **WID-03**: Count habit widget (water): tap to increment by 1 (interactive)
-- [ ] **WID-04**: Input habit widget (protein): tapping opens the app to the log entry sheet
-- [ ] **WID-05**: All widgets update immediately after interaction
+- [x] **WID-01**: Each habit has a configurable home screen widget that shows today's progress toward its daily target
+- [x] **WID-02**: Boolean habit widget: tap to toggle done/undone (interactive)
+- [x] **WID-03**: Count habit widget (water): tap to increment by 1 (interactive)
+- [x] **WID-04**: Input habit widget (protein): tapping opens the app to the log entry sheet
+- [x] **WID-05**: All widgets update immediately after interaction
 
 ### Today View
 
@@ -46,7 +46,7 @@
 - [x] **STAT-01**: Each habit shows a current streak (consecutive days completed)
 - [x] **STAT-02**: Each habit shows a best-ever streak
 - [x] **STAT-03**: Each habit shows a 30-day completion rate (percentage)
-- [ ] **STAT-04**: Missed days are displayed as neutral data (not punished visually)
+- [x] **STAT-04**: Missed days are displayed as neutral data (not punished visually)
 
 ### Notifications
 
@@ -122,12 +122,12 @@
 | STAT-01 | Phase 2 | Complete |
 | STAT-02 | Phase 2 | Complete |
 | STAT-03 | Phase 2 | Complete |
-| STAT-04 | Phase 2 | Pending |
-| WID-01 | Phase 3 | Pending |
-| WID-02 | Phase 3 | Pending |
-| WID-03 | Phase 3 | Pending |
-| WID-04 | Phase 3 | Pending |
-| WID-05 | Phase 3 | Pending |
+| STAT-04 | Phase 2 | Complete |
+| WID-01 | Phase 3 | Complete |
+| WID-02 | Phase 3 | Complete |
+| WID-03 | Phase 3 | Complete |
+| WID-04 | Phase 3 | Complete |
+| WID-05 | Phase 3 | Complete |
 | NOTF-01 | Phase 4 | Pending |
 | NOTF-02 | Phase 4 | Pending |
 | NOTF-03 | Phase 4 | Pending |

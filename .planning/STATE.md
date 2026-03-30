@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-core-app/02-04-PLAN.md — Stats tab with StatsListView, HabitStatsView, 30-day bar chart, and TabRootView fully wired
-last_updated: "2026-03-30T13:38:20.135Z"
+stopped_at: "Completed 03-widgets/03-01-PLAN.md — AppIntent infrastructure, HabitSnapshot/HabitWidgetEntry types, habitx:// URL scheme, and widget target source paths"
+last_updated: "2026-03-30T23:17:07.068Z"
 last_activity: 2026-03-30
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 9
+  completed_plans: 7
   percent: 0
 ---
 
@@ -21,12 +21,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** Logging a habit is so frictionless — one tap from the home screen — that it becomes a reflex, not a chore.
-**Current focus:** Phase 02 — core-app
+**Current focus:** Phase 03 — widgets
 
 ## Current Position
 
-Phase: 02 (core-app) — EXECUTING
-Plan: 4 of 4
+Phase: 03 (widgets) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
 Last activity: 2026-03-30
 
@@ -57,6 +57,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-core-app P01 | 30 | 2 tasks | 9 files |
 | Phase 02-core-app P03 | 8 | 1 tasks | 3 files |
 | Phase 02-core-app P04 | 10 | 2 tasks | 4 files |
+| Phase 03-widgets P01 | 12 | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-app]: habit.logs read directly in HabitHistoryView with dictionary lookup — no separate @Query needed; O(1) per-day access
 - [Phase 02-core-app]: Color.appAccent must be qualified explicitly in foregroundStyle — ShapeStyle doesn't expose Color static extensions via dot syntax
 - [Phase 02-core-app]: Color.appAccent used directly in Stats views — plan referenced HabitDefaults.appAccentColor but actual API is Color extension static let appAccent (established in 02-01)
+- [Phase 03-widgets]: static var -> static let for LocalizedStringResource in AppIntents — Swift 6 strict concurrency requires immutable global shared state
+- [Phase 03-widgets]: Build verification for iCloud-synced projects requires -derivedDataPath /tmp to avoid xattr resource fork codesign failures
 
 ### Pending Todos
 
@@ -92,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-30T13:38:20.131Z
-Stopped at: Completed 02-core-app/02-04-PLAN.md — Stats tab with StatsListView, HabitStatsView, 30-day bar chart, and TabRootView fully wired
+Last session: 2026-03-30T23:17:07.063Z
+Stopped at: Completed 03-widgets/03-01-PLAN.md — AppIntent infrastructure, HabitSnapshot/HabitWidgetEntry types, habitx:// URL scheme, and widget target source paths
 Resume file: None
