@@ -24,6 +24,7 @@
 		4A11ABBA77FC745DFDB7A7B3 /* HabitDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E23B8E98622A337CBA46C7 /* HabitDefaults.swift */; };
 		5949C4151E923FCC0C73CD7A /* HabitHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD9C7C45E03E07FC445849F /* HabitHistoryView.swift */; };
 		5DF4B4B89F7BE73B9C55003A /* HabitSchemaV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */; };
+		61A70442908C04CEC127AF71 /* HabitLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA77FA7D6EA1C07160FADD20 /* HabitLogService.swift */; };
 		64B3AA496D2D5CEAA622043A /* StatsCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */; };
 		6789A9B62CAF8F618DB7D5C9 /* HabitWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3691E4E28B310F0ECF678 /* HabitWidgetEntry.swift */; };
 		79D7EA2E1A5FEA7D6C2A4D94 /* HabitEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93D982A929CD09250C71727 /* HabitEntityQuery.swift */; };
@@ -33,11 +34,13 @@
 		8F96C7AA9F7788DAFE3F5DB1 /* TabRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E68BD52A2C78012F838DA /* TabRootView.swift */; };
 		91DA0AC9A8EBE9544E4FF141 /* HabitXWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */; };
 		A262FAD4A9FA4E545ADE25F2 /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */; };
+		A6822BAE9AF2549AE9354692 /* HabitDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E23B8E98622A337CBA46C7 /* HabitDefaults.swift */; };
 		ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */; };
 		C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
 		D1E24C43D26E9490F45EC76C /* HabitStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */; };
 		DC8EAED056C4F800741A7089 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93D08DDDE390B8BFCBFD225 /* TodayView.swift */; };
 		E8E74BB6FD2E5BB0D495AB06 /* ToggleBooleanHabitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077CAC54D49A42D539EEBB1 /* ToggleBooleanHabitIntent.swift */; };
+		EAC618E7AC6D145213DAA69B /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */; };
 		EF78577C8FC9767DAB0EB611 /* IncrementCountHabitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29EDB790C9A26F81CA409A4 /* IncrementCountHabitIntent.swift */; };
 		FC993CAE54F64F3924496B0A /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */; };
 /* End PBXBuildFile section */
@@ -402,8 +405,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6822BAE9AF2549AE9354692 /* HabitDefaults.swift in Sources */,
 				2B91D89C86FC789F8F9AC358 /* HabitEntity.swift in Sources */,
 				79D7EA2E1A5FEA7D6C2A4D94 /* HabitEntityQuery.swift in Sources */,
+				61A70442908C04CEC127AF71 /* HabitLogService.swift in Sources */,
 				C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */,
 				5DF4B4B89F7BE73B9C55003A /* HabitSchemaV1.swift in Sources */,
 				089A7739E92DC6806D0497B1 /* HabitSnapshot.swift in Sources */,
@@ -413,6 +418,7 @@
 				91DA0AC9A8EBE9544E4FF141 /* HabitXWidgetBundle.swift in Sources */,
 				EF78577C8FC9767DAB0EB611 /* IncrementCountHabitIntent.swift in Sources */,
 				FC993CAE54F64F3924496B0A /* SharedModelContainer.swift in Sources */,
+				EAC618E7AC6D145213DAA69B /* StatsCalculator.swift in Sources */,
 				E8E74BB6FD2E5BB0D495AB06 /* ToggleBooleanHabitIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +456,7 @@
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleURLTypes = "(\n  {\n    CFBundleURLName = \"com.habitx.app\";\n    CFBundleURLSchemes = (habitx);\n  }\n)\n";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -592,6 +599,7 @@
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleURLTypes = "(\n  {\n    CFBundleURLName = \"com.habitx.app\";\n    CFBundleURLSchemes = (habitx);\n  }\n)\n";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

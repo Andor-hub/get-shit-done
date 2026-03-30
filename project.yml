@@ -26,6 +26,13 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: true
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
         CODE_SIGN_ENTITLEMENTS: HabitX/HabitX/HabitX.entitlements
+        INFOPLIST_KEY_CFBundleURLTypes: |
+          (
+            {
+              CFBundleURLName = "com.habitx.app";
+              CFBundleURLSchemes = (habitx);
+            }
+          )
     entitlements:
       path: HabitX/HabitX/HabitX.entitlements
       properties:
@@ -38,6 +45,8 @@ targets:
     sources:
       - path: HabitX/HabitXWidget
       - path: HabitX/HabitX/Models
+      - path: HabitX/HabitX/Utilities
+      - path: HabitX/HabitX/Services
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app.widget
