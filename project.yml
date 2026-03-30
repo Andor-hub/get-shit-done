@@ -54,10 +54,13 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app.widget
-        GENERATE_INFOPLIST_FILE: true
         CODE_SIGN_ENTITLEMENTS: HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements
-        INFOPLIST_KEY_CFBundleDisplayName: HabitXWidget
-        INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    info:
+      path: HabitX/HabitXWidget/Info.plist
+      properties:
+        CFBundleDisplayName: HabitXWidget
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
       path: HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements
       properties:
