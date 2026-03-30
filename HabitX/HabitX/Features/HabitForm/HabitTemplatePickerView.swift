@@ -2,16 +2,14 @@ import SwiftUI
 import SwiftData
 
 /// Sheet that lets the user pick a habit template (Protein, Water, or Custom).
-/// After picking, it navigates into HabitFormView for final field editing.
+/// After picking, presents HabitFormView pre-filled with template values.
 struct HabitTemplatePickerView: View {
-    /// Number of existing habits — used to set sortOrder for the new habit.
     let habitCount: Int
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
 
+    // Non-nil value triggers the form sheet; item: passes it directly — no if-let race
     @State private var pendingHabit: HabitSchemaV1.Habit? = nil
-    @State private var showingForm = false
 
     var body: some View {
         NavigationStack {
@@ -38,7 +36,6 @@ struct HabitTemplatePickerView: View {
                         let blank = HabitSchemaV1.Habit()
                         blank.sortOrder = habitCount
                         pendingHabit = blank
-                        showingForm = true
                     } label: {
                         HStack {
                             Label("Custom Habit", systemImage: "plus.circle")
@@ -58,15 +55,14 @@ struct HabitTemplatePickerView: View {
                     Button("Cancel") { dismiss() }
                 }
             }
-            .sheet(isPresented: $showingForm) {
-                if let habit = pendingHabit {
-                    HabitFormView(habit: habit, isNew: true)
-                        .onDisappear {
-                            if !habit.name.isEmpty && habit.modelContext != nil {
-                                dismiss()
-                            }
+            .sheet(item: $pendingHabit) { habit in
+                HabitFormView(habit: habit, isNew: true)
+                    .onDisappear {
+                        // Habit was saved if it has a name and a context
+                        if !habit.name.isEmpty && habit.modelContext != nil {
+                            dismiss()
                         }
-                }
+                    }
             }
         }
     }
@@ -79,10 +75,7 @@ struct HabitTemplatePickerView: View {
         template: HabitTemplate
     ) -> some View {
         Button {
-            // Create the habit on tap, not during view body evaluation
-            let habit = createHabit(from: template, sortOrder: habitCount)
-            pendingHabit = habit
-            showingForm = true
+            pendingHabit = createHabit(from: template, sortOrder: habitCount)
         } label: {
             HStack {
                 Label(title, systemImage: systemImage)
