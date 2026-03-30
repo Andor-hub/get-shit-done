@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-core-app/02-01-PLAN.md — data services, stats calculator, habit defaults, and 27 unit tests
-last_updated: "2026-03-30T03:31:46.889Z"
+stopped_at: Completed 02-core-app/02-03-PLAN.md — HistoryListView and HabitHistoryView with 90-day per-habit log drill-down
+last_updated: "2026-03-30T13:27:19.273Z"
 last_activity: 2026-03-30
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 6
-  completed_plans: 3
+  completed_plans: 5
   percent: 0
 ---
 
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 02 (core-app) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 Status: Ready to execute
 Last activity: 2026-03-30
 
@@ -55,6 +55,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-foundation P01 | 15 | 2 tasks | 9 files |
 | Phase 01-foundation P02 | 10 | 2 tasks | 6 files |
 | Phase 02-core-app P01 | 30 | 2 tasks | 9 files |
+| Phase 02-core-app P03 | 8 | 1 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: xcodebuild -target with -sdk iphonesimulator required for build verification — xcodegen auto-generated schemes do not associate with simulator destinations properly
 - [Phase 02-core-app]: HabitLogService static enum pattern — no instance state; ModelContext passed per call for thread safety
 - [Phase 02-core-app]: SharedModelContainer falls back to default store when App Group not provisioned — enables unit tests without entitlements
+- [Phase 02-core-app]: habit.logs read directly in HabitHistoryView with dictionary lookup — no separate @Query needed; O(1) per-day access
+- [Phase 02-core-app]: Color.appAccent must be qualified explicitly in foregroundStyle — ShapeStyle doesn't expose Color static extensions via dot syntax
 
 ### Pending Todos
 
@@ -87,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-30T03:31:46.885Z
-Stopped at: Completed 02-core-app/02-01-PLAN.md — data services, stats calculator, habit defaults, and 27 unit tests
+Last session: 2026-03-30T13:27:19.270Z
+Stopped at: Completed 02-core-app/02-03-PLAN.md — HistoryListView and HabitHistoryView with 90-day per-habit log drill-down
 Resume file: None

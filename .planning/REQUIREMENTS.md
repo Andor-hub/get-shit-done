@@ -8,17 +8,17 @@
 ### Habit Management
 
 - [ ] **HAB-01**: User can create a habit with a name, type (boolean / count / input), and daily target
-- [ ] **HAB-02**: User can choose from default habits (Protein, Water) with pre-filled recommended targets during onboarding
+- [x] **HAB-02**: User can choose from default habits (Protein, Water) with pre-filled recommended targets during onboarding
 - [ ] **HAB-03**: User can edit a habit's name, type, target, and notification time
 - [ ] **HAB-04**: User can delete a habit (with confirmation)
 - [ ] **HAB-05**: User can reorder habits in the Today view
 
 ### Habit Logging
 
-- [ ] **LOG-01**: User can mark a boolean habit as done or undone from the Today view
-- [ ] **LOG-02**: User can increment a count habit (e.g. +1 cup of water) from the Today view
-- [ ] **LOG-03**: User can log a numerical value for an input habit (e.g. 35g protein) from the Today view
-- [ ] **LOG-04**: All habit logs reset at midnight for the new day (timezone-aware)
+- [x] **LOG-01**: User can mark a boolean habit as done or undone from the Today view
+- [x] **LOG-02**: User can increment a count habit (e.g. +1 cup of water) from the Today view
+- [x] **LOG-03**: User can log a numerical value for an input habit (e.g. 35g protein) from the Today view
+- [x] **LOG-04**: All habit logs reset at midnight for the new day (timezone-aware)
 
 ### Widgets
 
@@ -37,15 +37,15 @@
 
 ### History
 
-- [ ] **HIST-01**: User can view a per-habit log of past completions by date
-- [ ] **HIST-02**: History shows the logged value/count/completion for each past day
-- [ ] **HIST-03**: User can navigate back at least 90 days of history
+- [x] **HIST-01**: User can view a per-habit log of past completions by date
+- [x] **HIST-02**: History shows the logged value/count/completion for each past day
+- [x] **HIST-03**: User can navigate back at least 90 days of history
 
 ### Stats
 
-- [ ] **STAT-01**: Each habit shows a current streak (consecutive days completed)
-- [ ] **STAT-02**: Each habit shows a best-ever streak
-- [ ] **STAT-03**: Each habit shows a 30-day completion rate (percentage)
+- [x] **STAT-01**: Each habit shows a current streak (consecutive days completed)
+- [x] **STAT-02**: Each habit shows a best-ever streak
+- [x] **STAT-03**: Each habit shows a 30-day completion rate (percentage)
 - [ ] **STAT-04**: Missed days are displayed as neutral data (not punished visually)
 
 ### Notifications
@@ -104,24 +104,24 @@
 | INFRA-03 | Phase 1 | Complete |
 | INFRA-04 | Phase 1 | Complete |
 | HAB-01 | Phase 2 | Pending |
-| HAB-02 | Phase 2 | Pending |
+| HAB-02 | Phase 2 | Complete |
 | HAB-03 | Phase 2 | Pending |
 | HAB-04 | Phase 2 | Pending |
 | HAB-05 | Phase 2 | Pending |
-| LOG-01 | Phase 2 | Pending |
-| LOG-02 | Phase 2 | Pending |
-| LOG-03 | Phase 2 | Pending |
-| LOG-04 | Phase 2 | Pending |
+| LOG-01 | Phase 2 | Complete |
+| LOG-02 | Phase 2 | Complete |
+| LOG-03 | Phase 2 | Complete |
+| LOG-04 | Phase 2 | Complete |
 | TODAY-01 | Phase 2 | Pending |
 | TODAY-02 | Phase 2 | Pending |
 | TODAY-03 | Phase 2 | Pending |
 | TODAY-04 | Phase 2 | Pending |
-| HIST-01 | Phase 2 | Pending |
-| HIST-02 | Phase 2 | Pending |
-| HIST-03 | Phase 2 | Pending |
-| STAT-01 | Phase 2 | Pending |
-| STAT-02 | Phase 2 | Pending |
-| STAT-03 | Phase 2 | Pending |
+| HIST-01 | Phase 2 | Complete |
+| HIST-02 | Phase 2 | Complete |
+| HIST-03 | Phase 2 | Complete |
+| STAT-01 | Phase 2 | Complete |
+| STAT-02 | Phase 2 | Complete |
+| STAT-03 | Phase 2 | Complete |
 | STAT-04 | Phase 2 | Pending |
 | WID-01 | Phase 3 | Pending |
 | WID-02 | Phase 3 | Pending |

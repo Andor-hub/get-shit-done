@@ -48,8 +48,8 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Data service layer: HabitLogService, StatsCalculator, HabitDefaults + unit tests
-- [ ] 02-02-PLAN.md — Today view + habit management: tab bar, habit cards, logging interactions, add/edit/delete/reorder
-- [ ] 02-03-PLAN.md — History view: per-habit 90-day log drill-down
+- [x] 02-02-PLAN.md — Today view + habit management: tab bar, habit cards, logging interactions, add/edit/delete/reorder
+- [x] 02-03-PLAN.md — History view: per-habit 90-day log drill-down
 - [ ] 02-04-PLAN.md — Stats view: per-habit streak, completion rate, 30-day chart
 
 ### Phase 3: Widgets
