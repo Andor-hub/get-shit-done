@@ -78,19 +78,19 @@ struct TodayView: View {
     }
 
     private var emptyStateView: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "plus.circle")
-                .font(.system(size: 48))
-                .foregroundStyle(Color.appAccent)
-            Text("No habits yet")
-                .font(.title3)
-                .foregroundStyle(.secondary)
-            Button("Add Habit") {
-                activeSheet = .addHabit
+        Button {
+            activeSheet = .addHabit
+        } label: {
+            VStack(spacing: 16) {
+                Image(systemName: "plus.circle")
+                    .font(.system(size: 48))
+                    .foregroundStyle(Color.appAccent)
+                Text("No habits yet")
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Color.appAccent)
         }
+        .buttonStyle(.plain)
     }
 
     private var habitList: some View {
