@@ -1,12 +1,23 @@
 import SwiftUI
 import SwiftData
 
+private enum TodaySheet: Identifiable {
+    case addHabit
+    case editHabit(HabitSchemaV1.Habit)
+
+    var id: String {
+        switch self {
+        case .addHabit: return "addHabit"
+        case .editHabit(let habit): return "editHabit-\(habit.id)"
+        }
+    }
+}
+
 struct TodayView: View {
     @Query(sort: \HabitSchemaV1.Habit.sortOrder) private var habits: [HabitSchemaV1.Habit]
     @Environment(\.modelContext) private var modelContext
 
-    @State private var showingAddSheet = false
-    @State private var habitToEdit: HabitSchemaV1.Habit? = nil
+    @State private var activeSheet: TodaySheet? = nil
     @State private var habitToDelete: HabitSchemaV1.Habit? = nil
     @State private var showDeleteConfirmation = false
 
@@ -26,18 +37,20 @@ struct TodayView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showingAddSheet = true
+                        activeSheet = .addHabit
                     } label: {
                         Image(systemName: "plus.circle")
                             .font(.title3)
                     }
                 }
             }
-            .sheet(isPresented: $showingAddSheet) {
-                HabitTemplatePickerView(habitCount: habits.count)
-            }
-            .sheet(item: $habitToEdit) { habit in
-                HabitFormView(habit: habit, isNew: false)
+            .sheet(item: $activeSheet) { sheet in
+                switch sheet {
+                case .addHabit:
+                    HabitTemplatePickerView(habitCount: habits.count)
+                case .editHabit(let habit):
+                    HabitFormView(habit: habit, isNew: false)
+                }
             }
             .confirmationDialog(
                 deleteDialogTitle,
@@ -73,7 +86,7 @@ struct TodayView: View {
                 .font(.title3)
                 .foregroundStyle(.secondary)
             Button("Add Habit") {
-                showingAddSheet = true
+                activeSheet = .addHabit
             }
             .buttonStyle(.borderedProminent)
             .tint(Color.appAccent)
@@ -84,7 +97,7 @@ struct TodayView: View {
         List {
             ForEach(habits) { habit in
                 HabitCardView(habit: habit, onEdit: {
-                    habitToEdit = habit
+                    activeSheet = .editHabit(habit)
                 })
                 .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                 .listRowSeparator(.hidden)
