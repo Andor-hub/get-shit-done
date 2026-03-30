@@ -62,8 +62,12 @@ Plans:
   3. Tapping a count habit widget (e.g. Water) increments the count by 1 and the widget updates immediately without opening the app (verified on physical device)
   4. Tapping an input habit widget (e.g. Protein) opens the app to the log entry sheet for manual value entry
   5. The Today view in the main app reflects widget interactions without showing stale data after returning to the foreground
-**Plans**: TBD
-**UI hint**: yes
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — AppIntent infrastructure, HabitEntity, shared widget types, URL scheme registration
+- [ ] 03-02-PLAN.md — Widget views (CircularProgressRing, Small, Medium), providers, Widget struct definitions
+- [ ] 03-03-PLAN.md — Deep-link handler (habitx:// URL), foreground sync for WID-05
 
 ### Phase 4: Notifications + Polish
 **Goal**: Users receive a daily reminder for each habit they care about, the app is ready for App Store submission, and all three habit types have been regression-tested end-to-end on a physical device
@@ -85,5 +89,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete   | 2026-03-29 |
 | 2. Core App | 4/4 | Complete   | 2026-03-30 |
-| 3. Widgets | 0/TBD | Not started | - |
+| 3. Widgets | 0/3 | Planning complete | - |
 | 4. Notifications + Polish | 0/TBD | Not started | - |

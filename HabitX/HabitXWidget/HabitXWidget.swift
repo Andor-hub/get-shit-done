@@ -2,21 +2,19 @@ import WidgetKit
 import SwiftUI
 import SwiftData
 
-struct HabitWidgetEntry: TimelineEntry {
-    let date: Date
-}
+// HabitWidgetEntry and MediumWidgetEntry are defined in Models/HabitWidgetEntry.swift
 
 struct HabitTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> HabitWidgetEntry {
-        HabitWidgetEntry(date: .now)
+        HabitWidgetEntry(date: .now, habitSnapshot: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (HabitWidgetEntry) -> Void) {
-        completion(HabitWidgetEntry(date: .now))
+        completion(HabitWidgetEntry(date: .now, habitSnapshot: nil))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<HabitWidgetEntry>) -> Void) {
-        let entry = HabitWidgetEntry(date: .now)
+        let entry = HabitWidgetEntry(date: .now, habitSnapshot: nil)
         let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
     }
