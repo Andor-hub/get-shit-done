@@ -38,6 +38,9 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.habitx.shared
+    dependencies:
+      - target: HabitXWidget
+        embed: true
   HabitXWidget:
     type: app-extension
     platform: iOS
@@ -59,10 +62,6 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.habitx.shared
-    dependencies:
-      - target: HabitX
-        embed: false
-        link: false
   HabitXTests:
     type: bundle.unit-test
     platform: iOS

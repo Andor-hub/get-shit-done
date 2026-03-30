@@ -40,6 +40,7 @@
 		A262FAD4A9FA4E545ADE25F2 /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */; };
 		A6822BAE9AF2549AE9354692 /* HabitDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E23B8E98622A337CBA46C7 /* HabitDefaults.swift */; };
 		ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */; };
+		BF0995DE41ADF61A168DFB2B /* HabitXWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F397B4299497C72457793240 /* HabitXWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
 		D1E24C43D26E9490F45EC76C /* HabitStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */; };
 		D4EA5E9871044F0C30E25AA1 /* SmallWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1013B54DEAFA0A1DE8255C2 /* SmallWidgetProvider.swift */; };
@@ -58,14 +59,28 @@
 			remoteGlobalIDString = 845280BF1864673D0EC1B489;
 			remoteInfo = HabitX;
 		};
-		680C9CE70581C0F500CF5839 /* PBXContainerItemProxy */ = {
+		25FF600B9086EB25E2A30453 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74F49AA9F0CB6314C752F261 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 845280BF1864673D0EC1B489;
-			remoteInfo = HabitX;
+			remoteGlobalIDString = 122A0DF7EBC7A73FDE978EDE;
+			remoteInfo = HabitXWidget;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		08DF485899F17A05DA117BAC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BF0995DE41ADF61A168DFB2B /* HabitXWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0077CAC54D49A42D539EEBB1 /* ToggleBooleanHabitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleBooleanHabitIntent.swift; sourceTree = "<group>"; };
@@ -318,7 +333,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				831B24857BE67AB07AF71149 /* PBXTargetDependency */,
 			);
 			name = HabitXWidget;
 			packageProductDependencies = (
@@ -333,10 +347,12 @@
 			buildPhases = (
 				AB278773C1204B7BDB313A51 /* Sources */,
 				EB52550C6714A336AFC0ED8B /* Resources */,
+				08DF485899F17A05DA117BAC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7975DCB34DCFE380EF66DC40 /* PBXTargetDependency */,
 			);
 			name = HabitX;
 			packageProductDependencies = (
@@ -471,10 +487,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		831B24857BE67AB07AF71149 /* PBXTargetDependency */ = {
+		7975DCB34DCFE380EF66DC40 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 845280BF1864673D0EC1B489 /* HabitX */;
-			targetProxy = 680C9CE70581C0F500CF5839 /* PBXContainerItemProxy */;
+			target = 122A0DF7EBC7A73FDE978EDE /* HabitXWidget */;
+			targetProxy = 25FF600B9086EB25E2A30453 /* PBXContainerItemProxy */;
 		};
 		9F3F95FDB49F004EA6CB16DD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
