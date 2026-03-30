@@ -98,6 +98,7 @@
 		62DD186929896A99F418A443 /* HabitX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HabitX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746393A4F4715D295E08A1FB /* CircularProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressRingView.swift; sourceTree = "<group>"; };
 		76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXApp.swift; sourceTree = "<group>"; };
+		79D79FF0CCD2DB03F3C65A02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		81A9A1DADF67447687C71210 /* MediumWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetProvider.swift; sourceTree = "<group>"; };
 		8A454400766B5D4BD3F13353 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
 		8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculatorTests.swift; sourceTree = "<group>"; };
@@ -294,6 +295,7 @@
 				277B5CAB7C0C322E00193D4A /* ContentView.swift */,
 				4989BB6243283147700E739D /* HabitX.entitlements */,
 				76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */,
+				79D79FF0CCD2DB03F3C65A02 /* Info.plist */,
 				0B6ED50A232401579EDB498E /* Features */,
 				A783F54425480938B38B6C79 /* Models */,
 				3EF671580C115B63C2A2F31C /* Services */,
@@ -507,12 +509,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleURLTypes = "(\n  {\n    CFBundleURLName = \"com.habitx.app\";\n    CFBundleURLSchemes = (habitx);\n  }\n)\n";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_FILE = HabitX/HabitX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -650,12 +647,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleURLTypes = "(\n  {\n    CFBundleURLName = \"com.habitx.app\";\n    CFBundleURLSchemes = (habitx);\n  }\n)\n";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_FILE = HabitX/HabitX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

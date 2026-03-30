@@ -18,21 +18,22 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app
-        GENERATE_INFOPLIST_FILE: true
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
-        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
-        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
-        INFOPLIST_KEY_UILaunchScreen_Generation: true
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
         CODE_SIGN_ENTITLEMENTS: HabitX/HabitX/HabitX.entitlements
-        INFOPLIST_KEY_CFBundleURLTypes: |
-          (
-            {
-              CFBundleURLName = "com.habitx.app";
-              CFBundleURLSchemes = (habitx);
-            }
-          )
+    info:
+      path: HabitX/HabitX/Info.plist
+      properties:
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UIApplicationSupportsIndirectInputEvents: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations~iphone:
+          - UIInterfaceOrientationPortrait
+        CFBundleURLTypes:
+          - CFBundleURLName: com.habitx.app
+            CFBundleURLSchemes:
+              - habitx
     entitlements:
       path: HabitX/HabitX/HabitX.entitlements
       properties:
