@@ -5,7 +5,7 @@ import SwiftData
 struct HabitXApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabRootView()
         }
         .modelContainer(SharedModelContainer.container)
     }
