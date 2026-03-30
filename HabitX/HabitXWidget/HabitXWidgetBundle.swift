@@ -4,6 +4,7 @@ import SwiftUI
 @main
 struct HabitXWidgetBundle: WidgetBundle {
     var body: some Widget {
-        HabitXWidget()
+        HabitSmallWidget()
+        HabitMediumWidget()
     }
 }
