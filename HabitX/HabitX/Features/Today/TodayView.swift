@@ -4,16 +4,19 @@ import SwiftData
 private enum TodaySheet: Identifiable {
     case addHabit
     case editHabit(HabitSchemaV1.Habit)
+    case inputHabit(HabitSchemaV1.Habit)
 
     var id: String {
         switch self {
         case .addHabit: return "addHabit"
         case .editHabit(let habit): return "editHabit-\(habit.id)"
+        case .inputHabit(let habit): return "inputHabit-\(habit.id)"
         }
     }
 }
 
 struct TodayView: View {
+    @Binding var deepLinkHabitId: UUID?
     @Query(sort: \HabitSchemaV1.Habit.sortOrder) private var habits: [HabitSchemaV1.Habit]
     @Environment(\.modelContext) private var modelContext
 
@@ -50,6 +53,8 @@ struct TodayView: View {
                     HabitTemplatePickerView(habitCount: habits.count)
                 case .editHabit(let habit):
                     HabitFormView(habit: habit, isNew: false)
+                case .inputHabit(let habit):
+                    NumberInputSheet(habit: habit)
                 }
             }
             .confirmationDialog(
@@ -66,6 +71,13 @@ struct TodayView: View {
                 Button("Cancel", role: .cancel) {
                     habitToDelete = nil
                 }
+            }
+            .onChange(of: deepLinkHabitId) { _, newId in
+                guard let id = newId else { return }
+                if let habit = habits.first(where: { $0.id == id }) {
+                    activeSheet = .inputHabit(habit)
+                }
+                deepLinkHabitId = nil
             }
         }
     }
@@ -126,5 +138,5 @@ struct TodayView: View {
 }
 
 #Preview {
-    TodayView()
+    TodayView(deepLinkHabitId: .constant(nil))
 }
