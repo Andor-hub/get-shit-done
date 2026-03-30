@@ -24,11 +24,13 @@
 		64B3AA496D2D5CEAA622043A /* StatsCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */; };
 		7A2BF64C9CB2925A80E88F1E /* HabitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63986F6D61BD9E4B461A168 /* HabitFormView.swift */; };
 		8062084EA4379ADD6AB4E263 /* HabitTemplatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98D973E2B9C24EA11A8803 /* HabitTemplatePickerView.swift */; };
+		8F150ACE9A7BF57331748CF4 /* StatsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC828431483A9659CD71ED17 /* StatsListView.swift */; };
 		8F96C7AA9F7788DAFE3F5DB1 /* TabRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E68BD52A2C78012F838DA /* TabRootView.swift */; };
 		91DA0AC9A8EBE9544E4FF141 /* HabitXWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */; };
 		A262FAD4A9FA4E545ADE25F2 /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */; };
 		ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */; };
 		C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
+		D1E24C43D26E9490F45EC76C /* HabitStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */; };
 		DC8EAED056C4F800741A7089 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93D08DDDE390B8BFCBFD225 /* TodayView.swift */; };
 		FC993CAE54F64F3924496B0A /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +69,8 @@
 		8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculatorTests.swift; sourceTree = "<group>"; };
 		9F319A4E4E97884DCF211DE0 /* HabitXWidgetEntitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitXWidgetEntitlements.entitlements; sourceTree = "<group>"; };
 		A93D08DDDE390B8BFCBFD225 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		AC828431483A9659CD71ED17 /* StatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsListView.swift; sourceTree = "<group>"; };
+		B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatsView.swift; sourceTree = "<group>"; };
 		C4E7A0BA13FC90E564EE61DF /* HabitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardView.swift; sourceTree = "<group>"; };
 		C63986F6D61BD9E4B461A168 /* HabitFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFormView.swift; sourceTree = "<group>"; };
 		CA77FA7D6EA1C07160FADD20 /* HabitLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogService.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 				0D9BBA1160B9D6EA7030A60F /* HabitForm */,
 				5F59AC5A955FCEBFCDC170CD /* History */,
 				FCA568322515A7EB91EA3B71 /* Root */,
+				1DFDD442AFE0E388CC161EBC /* Stats */,
 				3B04B3A4B4FA94554A4037B2 /* Today */,
 			);
 			path = Features;
@@ -99,6 +104,15 @@
 				1B98D973E2B9C24EA11A8803 /* HabitTemplatePickerView.swift */,
 			);
 			path = HabitForm;
+			sourceTree = "<group>";
+		};
+		1DFDD442AFE0E388CC161EBC /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */,
+				AC828431483A9659CD71ED17 /* StatsListView.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		205CE55B8F8787240CA66EAD /* HabitXTests */ = {
@@ -334,12 +348,14 @@
 				2A5CC0B282CFA0D33E0C9030 /* HabitLogService.swift in Sources */,
 				376A28C09F5FC3C6F3DC23AE /* HabitMigrationPlan.swift in Sources */,
 				2C3159434E2B67255FEFE1F8 /* HabitSchemaV1.swift in Sources */,
+				D1E24C43D26E9490F45EC76C /* HabitStatsView.swift in Sources */,
 				8062084EA4379ADD6AB4E263 /* HabitTemplatePickerView.swift in Sources */,
 				ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */,
 				3B45AFD45A4A2C66F6980FB2 /* HistoryListView.swift in Sources */,
 				0991BFDE67F3F8B1E1C0B9EC /* NumberInputSheet.swift in Sources */,
 				17C942000E6C2866378F5651 /* SharedModelContainer.swift in Sources */,
 				A262FAD4A9FA4E545ADE25F2 /* StatsCalculator.swift in Sources */,
+				8F150ACE9A7BF57331748CF4 /* StatsListView.swift in Sources */,
 				8F96C7AA9F7788DAFE3F5DB1 /* TabRootView.swift in Sources */,
 				DC8EAED056C4F800741A7089 /* TodayView.swift in Sources */,
 			);
