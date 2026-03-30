@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-core-app/02-03-PLAN.md — HistoryListView and HabitHistoryView with 90-day per-habit log drill-down
-last_updated: "2026-03-30T13:27:19.273Z"
+stopped_at: Completed 02-core-app/02-04-PLAN.md — Stats tab with StatsListView, HabitStatsView, 30-day bar chart, and TabRootView fully wired
+last_updated: "2026-03-30T13:38:20.135Z"
 last_activity: 2026-03-30
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
   percent: 0
 ---
 
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 ## Current Position
 
 Phase: 02 (core-app) — EXECUTING
-Plan: 3 of 4
+Plan: 4 of 4
 Status: Ready to execute
 Last activity: 2026-03-30
 
@@ -56,6 +56,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-foundation P02 | 10 | 2 tasks | 6 files |
 | Phase 02-core-app P01 | 30 | 2 tasks | 9 files |
 | Phase 02-core-app P03 | 8 | 1 tasks | 3 files |
+| Phase 02-core-app P04 | 10 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,7 @@ Recent decisions affecting current work:
 - [Phase 02-core-app]: SharedModelContainer falls back to default store when App Group not provisioned — enables unit tests without entitlements
 - [Phase 02-core-app]: habit.logs read directly in HabitHistoryView with dictionary lookup — no separate @Query needed; O(1) per-day access
 - [Phase 02-core-app]: Color.appAccent must be qualified explicitly in foregroundStyle — ShapeStyle doesn't expose Color static extensions via dot syntax
+- [Phase 02-core-app]: Color.appAccent used directly in Stats views — plan referenced HabitDefaults.appAccentColor but actual API is Color extension static let appAccent (established in 02-01)
 
 ### Pending Todos
 
@@ -90,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-30T13:27:19.270Z
-Stopped at: Completed 02-core-app/02-03-PLAN.md — HistoryListView and HabitHistoryView with 90-day per-habit log drill-down
+Last session: 2026-03-30T13:38:20.131Z
+Stopped at: Completed 02-core-app/02-04-PLAN.md — Stats tab with StatsListView, HabitStatsView, 30-day bar chart, and TabRootView fully wired
 Resume file: None

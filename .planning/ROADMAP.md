@@ -13,7 +13,7 @@ HabitX 2.0 ships as a native iOS habit tracker where every interaction is design
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Xcode project, shared data layer, App Groups, VersionedSchema — everything the app and widget depend on (completed 2026-03-29)
-- [ ] **Phase 2: Core App** - Today view, habit management, all three logging types, History, and Stats
+- [x] **Phase 2: Core App** - Today view, habit management, all three logging types, History, and Stats (completed 2026-03-30)
 - [ ] **Phase 3: Widgets** - Per-habit home screen widgets with read display and interactive tap-to-log
 - [ ] **Phase 4: Notifications + Polish** - Per-habit daily reminders, notification permission flow, and App Store pre-submission tasks
 
@@ -44,13 +44,13 @@ Plans:
   3. All habit logs reset at midnight timezone-correctly — a habit completed on Monday shows as incomplete on Tuesday
   4. User can view a scrollable per-habit history going back at least 90 days showing logged values for each past day
   5. User can view streak (current and best), 30-day completion rate, and missed days displayed as neutral data (not penalized visually) for each habit
-**Plans:** 1/4 plans executed
+**Plans:** 4/4 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md — Data service layer: HabitLogService, StatsCalculator, HabitDefaults + unit tests
 - [x] 02-02-PLAN.md — Today view + habit management: tab bar, habit cards, logging interactions, add/edit/delete/reorder
 - [x] 02-03-PLAN.md — History view: per-habit 90-day log drill-down
-- [ ] 02-04-PLAN.md — Stats view: per-habit streak, completion rate, 30-day chart
+- [x] 02-04-PLAN.md — Stats view: per-habit streak, completion rate, 30-day chart
 
 ### Phase 3: Widgets
 **Goal**: Every habit has a home screen widget that shows current progress and — for boolean and count habits — lets users log directly from the widget without opening the app
@@ -84,6 +84,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete   | 2026-03-29 |
-| 2. Core App | 1/4 | In Progress|  |
+| 2. Core App | 4/4 | Complete   | 2026-03-30 |
 | 3. Widgets | 0/TBD | Not started | - |
 | 4. Notifications + Polish | 0/TBD | Not started | - |
