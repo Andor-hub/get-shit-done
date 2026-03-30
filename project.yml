@@ -54,3 +54,21 @@ targets:
       - target: HabitX
         embed: false
         link: false
+  HabitXTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: HabitX/HabitXTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.habitx.app.tests
+        GENERATE_INFOPLIST_FILE: true
+        SWIFT_VERSION: "6.0"
+        SWIFT_STRICT_CONCURRENCY: complete
+    entitlements:
+      path: HabitX/HabitXTests/HabitXTests.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.habitx.shared
+    dependencies:
+      - target: HabitX

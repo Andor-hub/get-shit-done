@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		106F903D461DB3A35CEFFD9C /* HabitLogServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F597F0576D64FB8B9E8914CA /* HabitLogServiceTests.swift */; };
 		17C942000E6C2866378F5651 /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */; };
 		1AA3530FD86DD3FA506E9B2B /* HabitXWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC1AF864C49E76C428BA6F3 /* HabitXWidget.swift */; };
 		2A5CC0B282CFA0D33E0C9030 /* HabitLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA77FA7D6EA1C07160FADD20 /* HabitLogService.swift */; };
@@ -16,6 +17,7 @@
 		376A28C09F5FC3C6F3DC23AE /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
 		4A11ABBA77FC745DFDB7A7B3 /* HabitDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E23B8E98622A337CBA46C7 /* HabitDefaults.swift */; };
 		5DF4B4B89F7BE73B9C55003A /* HabitSchemaV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */; };
+		64B3AA496D2D5CEAA622043A /* StatsCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */; };
 		91DA0AC9A8EBE9544E4FF141 /* HabitXWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */; };
 		A262FAD4A9FA4E545ADE25F2 /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */; };
 		ABBBE2C78BF66113EAF9E161 /* HabitXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */; };
@@ -24,6 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0574A7123EA24EBBD47A343A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74F49AA9F0CB6314C752F261 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 845280BF1864673D0EC1B489;
+			remoteInfo = HabitX;
+		};
 		680C9CE70581C0F500CF5839 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74F49AA9F0CB6314C752F261 /* Project object */;
@@ -34,14 +43,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072013B7DB9282FE8EA85CEF /* HabitXTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HabitXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSchemaV1.swift; sourceTree = "<group>"; };
 		277B5CAB7C0C322E00193D4A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		43AF308D860A76AAB701DA79 /* HabitXTests.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitXTests.entitlements; sourceTree = "<group>"; };
 		4989BB6243283147700E739D /* HabitX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitX.entitlements; sourceTree = "<group>"; };
 		562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculator.swift; sourceTree = "<group>"; };
 		5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMigrationPlan.swift; sourceTree = "<group>"; };
 		5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
 		62DD186929896A99F418A443 /* HabitX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HabitX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXApp.swift; sourceTree = "<group>"; };
+		8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculatorTests.swift; sourceTree = "<group>"; };
 		9F319A4E4E97884DCF211DE0 /* HabitXWidgetEntitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitXWidgetEntitlements.entitlements; sourceTree = "<group>"; };
 		CA77FA7D6EA1C07160FADD20 /* HabitLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogService.swift; sourceTree = "<group>"; };
 		D6E23B8E98622A337CBA46C7 /* HabitDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDefaults.swift; sourceTree = "<group>"; };
@@ -49,13 +61,26 @@
 		EBC1AF864C49E76C428BA6F3 /* HabitXWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXWidget.swift; sourceTree = "<group>"; };
 		F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXWidgetBundle.swift; sourceTree = "<group>"; };
 		F397B4299497C72457793240 /* HabitXWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HabitXWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F597F0576D64FB8B9E8914CA /* HabitLogServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		205CE55B8F8787240CA66EAD /* HabitXTests */ = {
+			isa = PBXGroup;
+			children = (
+				F597F0576D64FB8B9E8914CA /* HabitLogServiceTests.swift */,
+				43AF308D860A76AAB701DA79 /* HabitXTests.entitlements */,
+				8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */,
+			);
+			name = HabitXTests;
+			path = HabitX/HabitXTests;
+			sourceTree = "<group>";
+		};
 		239486FFD9FF627268D0FD53 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				62DD186929896A99F418A443 /* HabitX.app */,
+				072013B7DB9282FE8EA85CEF /* HabitXTests.xctest */,
 				F397B4299497C72457793240 /* HabitXWidget.appex */,
 			);
 			name = Products;
@@ -126,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				ED35F51620CB8C041AA549D7 /* HabitX */,
+				205CE55B8F8787240CA66EAD /* HabitXTests */,
 				C95E25FA6E627B61D48E5121 /* HabitXWidget */,
 				239486FFD9FF627268D0FD53 /* Products */,
 			);
@@ -170,6 +196,24 @@
 			productReference = 62DD186929896A99F418A443 /* HabitX.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F7742026F73AC32666077A13 /* HabitXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C973C974DAACEE8458375C5 /* Build configuration list for PBXNativeTarget "HabitXTests" */;
+			buildPhases = (
+				D317E27AA319CCB2F3C857C1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F3F95FDB49F004EA6CB16DD /* PBXTargetDependency */,
+			);
+			name = HabitXTests;
+			packageProductDependencies = (
+			);
+			productName = HabitXTests;
+			productReference = 072013B7DB9282FE8EA85CEF /* HabitXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -196,6 +240,7 @@
 			projectRoot = "";
 			targets = (
 				845280BF1864673D0EC1B489 /* HabitX */,
+				F7742026F73AC32666077A13 /* HabitXTests */,
 				122A0DF7EBC7A73FDE978EDE /* HabitXWidget */,
 			);
 		};
@@ -240,6 +285,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D317E27AA319CCB2F3C857C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				106F903D461DB3A35CEFFD9C /* HabitLogServiceTests.swift in Sources */,
+				64B3AA496D2D5CEAA622043A /* StatsCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -247,6 +301,11 @@
 			isa = PBXTargetDependency;
 			target = 845280BF1864673D0EC1B489 /* HabitX */;
 			targetProxy = 680C9CE70581C0F500CF5839 /* PBXContainerItemProxy */;
+		};
+		9F3F95FDB49F004EA6CB16DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 845280BF1864673D0EC1B489 /* HabitX */;
+			targetProxy = 0574A7123EA24EBBD47A343A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -373,6 +432,26 @@
 			};
 			name = Release;
 		};
+		7B63127423F14C01CB734875 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXTests/HabitXTests.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app.tests;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HabitX.app/HabitX";
+			};
+			name = Debug;
+		};
 		7B9BDB9393BC6AE29C9431F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -452,6 +531,26 @@
 			};
 			name = Release;
 		};
+		DA8849802B0FC087F77EDE03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXTests/HabitXTests.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app.tests;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HabitX.app/HabitX";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -478,6 +577,15 @@
 			buildConfigurations = (
 				031A088B497DBFD349C0ED6B /* Debug */,
 				7B9BDB9393BC6AE29C9431F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9C973C974DAACEE8458375C5 /* Build configuration list for PBXNativeTarget "HabitXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B63127423F14C01CB734875 /* Debug */,
+				DA8849802B0FC087F77EDE03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
