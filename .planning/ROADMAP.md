@@ -78,7 +78,11 @@ Plans:
   2. If the habit is already completed when the scheduled notification fires, the notification is cancelled automatically and does not appear
   3. The app requests notification permission only after the user sets a reminder time on their first habit — not on first launch
   4. The app passes App Store review with a valid PrivacyInfo.xcprivacy manifest on both targets and no crashes on final TestFlight regression
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — NotificationService, HabitFormView reminder UI, TabRootView foreground cancellation
+- [ ] 04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, empty state copy verification, TestFlight regression checklist
 
 ## Progress
 
@@ -90,4 +94,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation | 2/2 | Complete   | 2026-03-29 |
 | 2. Core App | 4/4 | Complete   | 2026-03-30 |
 | 3. Widgets | 3/3 | Complete   | 2026-03-31 |
-| 4. Notifications + Polish | 0/TBD | Not started | - |
+| 4. Notifications + Polish | 0/2 | Not started | - |
