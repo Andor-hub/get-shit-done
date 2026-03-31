@@ -1,10 +1,12 @@
 import SwiftUI
+import SwiftData
 import WidgetKit
 
 struct TabRootView: View {
     @Binding var deepLinkHabitId: UUID?
     @State private var selectedTab: Int = 0
     @Environment(\.scenePhase) private var scenePhase
+    @Query private var habits: [HabitSchemaV1.Habit]
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -33,6 +35,7 @@ struct TabRootView: View {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 WidgetCenter.shared.reloadAllTimelines()
+                NotificationService.cancelRemindersForCompletedHabits(habits)
             }
         }
     }
