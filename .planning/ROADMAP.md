@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Xcode project, shared data layer, App Groups, VersionedSchema — everything the app and widget depend on (completed 2026-03-29)
 - [x] **Phase 2: Core App** - Today view, habit management, all three logging types, History, and Stats (completed 2026-03-30)
 - [x] **Phase 3: Widgets** - Per-habit home screen widgets with read display and interactive tap-to-log (completed 2026-03-31)
-- [ ] **Phase 4: Notifications + Polish** - Per-habit daily reminders, notification permission flow, and App Store pre-submission tasks
+- [x] **Phase 4: Notifications + Polish** - Per-habit daily reminders, notification permission flow, and App Store pre-submission tasks (completed 2026-03-31)
 
 ## Phase Details
 
@@ -84,6 +84,7 @@ Plans:
 - [x] 04-01-PLAN.md — NotificationService, HabitFormView reminder UI, TabRootView foreground cancellation
 - [x] 04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, empty state copy verification, TestFlight regression checklist
 
+
 ## Progress
 
 **Execution Order:**
@@ -94,4 +95,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation | 2/2 | Complete   | 2026-03-29 |
 | 2. Core App | 4/4 | Complete   | 2026-03-30 |
 | 3. Widgets | 3/3 | Complete   | 2026-03-31 |
-| 4. Notifications + Polish | 1/2 | In Progress|  |
+| 4. Notifications + Polish | 2/2 | Complete   | 2026-03-31 |
