@@ -81,7 +81,7 @@ Plans:
 **Plans:** 1/2 plans executed
 
 Plans:
-- [ ] 04-01-PLAN.md — NotificationService, HabitFormView reminder UI, TabRootView foreground cancellation
+- [x] 04-01-PLAN.md — NotificationService, HabitFormView reminder UI, TabRootView foreground cancellation
 - [x] 04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, empty state copy verification, TestFlight regression checklist
 
 ## Progress

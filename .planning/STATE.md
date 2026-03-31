@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 04-notifications-polish/04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, TodayView empty state polish, TestFlight regression checklist
-last_updated: "2026-03-31T21:19:06.283Z"
+status: verifying
+stopped_at: Completed 04-notifications-polish/04-01-PLAN.md — NotificationService, HabitFormView reminder UI, TabRootView foreground cancellation
+last_updated: "2026-03-31T21:19:58.765Z"
 last_activity: 2026-03-31
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
   percent: 0
 ---
 
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 Phase: 04 (notifications-polish) — EXECUTING
 Plan: 2 of 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-03-31
 
 Progress: [░░░░░░░░░░] 0%
@@ -59,6 +59,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-core-app P04 | 10 | 2 tasks | 4 files |
 | Phase 03-widgets P01 | 12 | 2 tasks | 10 files |
 | Phase 04-notifications-polish P02 | 15 | 2 tasks | 5 files |
+| Phase 04-notifications-polish P01 | 4 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -85,6 +86,8 @@ Recent decisions affecting current work:
 - [Phase 03-widgets]: Build verification for iCloud-synced projects requires -derivedDataPath /tmp to avoid xattr resource fork codesign failures
 - [Phase 04-notifications-polish]: Each target requires a separate physical PrivacyInfo.xcprivacy file — sharing one path causes XcodeGen Multiple commands produce build error
 - [Phase 04-notifications-polish]: fileTypes xcprivacy buildPhase: resources override required in project.yml for correct Copy Bundle Resources placement
+- [Phase 04-notifications-polish]: NotificationService follows HabitLogService static enum pattern — no instance state, @MainActor for UNUserNotificationCenter thread safety
+- [Phase 04-notifications-polish]: Permission requested contextually on first toggle enable, not on launch — avoids cold permission prompt
 
 ### Pending Todos
 
@@ -98,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-31T21:19:06.278Z
-Stopped at: Completed 04-notifications-polish/04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, TodayView empty state polish, TestFlight regression checklist
+Last session: 2026-03-31T21:19:58.754Z
+Stopped at: Completed 04-notifications-polish/04-01-PLAN.md — NotificationService, HabitFormView reminder UI, TabRootView foreground cancellation
 Resume file: None
