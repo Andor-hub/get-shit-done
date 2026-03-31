@@ -97,7 +97,7 @@ struct TodayView: View {
                 Image(systemName: "plus.circle")
                     .font(.system(size: 48))
                     .foregroundStyle(Color.appAccent)
-                Text("No habits yet")
+                Text("No habits yet -- tap + to add your first one")
                     .font(.title3)
                     .foregroundStyle(.secondary)
             }
