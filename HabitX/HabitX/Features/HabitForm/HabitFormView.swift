@@ -16,6 +16,11 @@ struct HabitFormView: View {
     @State private var selectedType: HabitType = .boolean
     @State private var targetString: String = ""
     @State private var unit: String = ""
+    @State private var reminderEnabled: Bool = false
+    @State private var reminderTime: Date = Calendar.current.date(
+        bySettingHour: 8, minute: 0, second: 0, of: Date()
+    ) ?? Date()
+    @State private var notificationsDenied: Bool = false
 
     private var isSaveEnabled: Bool {
         !name.trimmingCharacters(in: .whitespaces).isEmpty
@@ -37,6 +42,18 @@ struct HabitFormView: View {
                     TextField("Daily Target", text: $targetString)
                         .keyboardType(.decimalPad)
                     TextField("Unit (e.g. cups, g)", text: $unit)
+                }
+
+                Section("Reminders") {
+                    Toggle("Remind me", isOn: $reminderEnabled)
+                    if reminderEnabled {
+                        DatePicker("Time", selection: $reminderTime, displayedComponents: .hourAndMinute)
+                    }
+                    if notificationsDenied {
+                        Text("Enable notifications in Settings to receive reminders.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
             .navigationTitle(isNew ? "New Habit" : "Edit Habit")
@@ -61,6 +78,23 @@ struct HabitFormView: View {
                 let target = habit.dailyTarget
                 targetString = target == 0 ? "" : String(format: "%.0f", target)
                 unit = habit.unit
+                reminderEnabled = habit.reminderTime != nil
+                if let existingTime = habit.reminderTime {
+                    reminderTime = existingTime
+                }
+            }
+            .onChange(of: reminderEnabled) { _, isEnabled in
+                if isEnabled {
+                    Task {
+                        let granted = await NotificationService.requestAuthorizationIfNeeded()
+                        if !granted {
+                            notificationsDenied = true
+                            reminderEnabled = false
+                        } else {
+                            notificationsDenied = false
+                        }
+                    }
+                }
             }
         }
     }
@@ -71,6 +105,14 @@ struct HabitFormView: View {
         habit.habitType = selectedType.rawValue
         habit.dailyTarget = Double(targetString) ?? 1.0
         habit.unit = unit
+
+        if reminderEnabled {
+            habit.reminderTime = reminderTime
+            Task { await NotificationService.scheduleReminder(for: habit) }
+        } else {
+            habit.reminderTime = nil
+            NotificationService.cancelReminder(for: habit)
+        }
 
         if isNew {
             modelContext.insert(habit)
