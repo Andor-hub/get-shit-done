@@ -1,5 +1,5 @@
 ---
-status: partial
+status: complete
 phase: 04-notifications-polish
 source: [04-01-SUMMARY.md, 04-02-SUMMARY.md]
 started: 2026-03-31T00:00:00Z
@@ -22,45 +22,31 @@ result: pass
 
 ### 3. Toggle ON Shows DatePicker
 expected: Tap the "Remind me" toggle to turn it ON. A "Time" DatePicker appears inline below the toggle showing 8:00 AM (or the previously saved time if editing an existing reminder). The picker lets you select hour and minute.
-result: blocked
-blocked_by: physical-device
-reason: "i cannot enable notifications on my simulator"
+result: pass
 
 ### 4. Toggle OFF Hides DatePicker
 expected: With the toggle ON and DatePicker visible, tap the toggle again to turn it OFF. The DatePicker disappears immediately. Saving the form with toggle OFF clears any previously saved reminder time.
-result: blocked
-blocked_by: physical-device
-reason: "cannot enable notifications on simulator — toggle ON not possible"
+result: pass
 
 ### 5. Reminder Time Persists After Save
 expected: Open a habit edit form, enable the reminder toggle, set a specific time (e.g. 9:30 AM), and save. Re-open the same habit's edit form. The Reminders toggle is ON and the time picker shows 9:30 AM — the value was written to the model and reloaded correctly.
-result: blocked
-blocked_by: physical-device
-reason: "cannot enable notifications on simulator — toggle ON not possible"
+result: pass
 
-### 6. Notification Permission — First Toggle Enable (Physical Device)
-expected: On a physical device with notification permission not yet granted for this app — open a habit edit form and turn ON the "Remind me" toggle. The iOS system permission dialog ("HabitX would like to send you notifications") appears immediately. Accepting enables the toggle and saves normally.
-result: blocked
-blocked_by: physical-device
-reason: "requires physical device"
+### 6. Notification Permission — First Toggle Enable
+expected: On a fresh install with notification permission not yet granted — open a habit edit form and turn ON the "Remind me" toggle. The iOS system permission dialog ("HabitX would like to send you notifications") appears immediately. Accepting enables the toggle and saves normally.
+result: pass
 
 ### 7. Denied Permission Shows Inline Caption
-expected: With notification permission denied in Settings — open a habit edit form and attempt to turn ON the "Remind me" toggle. The system will not show a dialog (iOS only shows it once). The toggle immediately reverts to OFF, and a small grey caption appears: "Enable notifications in Settings to receive reminders." No modal, no alert.
-result: blocked
-blocked_by: physical-device
-reason: "requires physical device"
+expected: With notification permission denied in Settings — open a habit edit form and attempt to turn ON the "Remind me" toggle. The toggle immediately reverts to OFF, and a small grey caption appears: "Enable notifications in Settings to receive reminders." No modal, no alert.
+result: pass
 
-### 8. Foreground Cancellation for Completed Habits (Physical Device)
-expected: On a physical device — set a reminder for a habit. Log the habit as completed for today. Background the app, then bring it back to foreground. The completed habit's notification should be cancelled (removed from pending) so it does not fire later that day.
-result: blocked
-blocked_by: physical-device
-reason: "requires physical device"
+### 8. Foreground Cancellation for Completed Habits
+expected: Set a reminder for a habit. Log the habit as completed for today. Background the app, then bring it back to foreground. The completed habit's pending notification is cancelled so it does not fire later that day.
+result: pass
 
-### 9. Notification Fires at Scheduled Time (Physical Device)
-expected: On a physical device — set a reminder for a habit at a time 1-2 minutes in the future. Lock the device or background the app. At the scheduled time, a notification appears showing only the habit name as the title with no body text, no badge, and the default notification sound. Tapping the notification opens the HabitX app.
-result: blocked
-blocked_by: physical-device
-reason: "requires physical device"
+### 9. Notification Fires at Scheduled Time
+expected: Set a reminder for a habit at a time 1-2 minutes in the future. Lock the device or background the app. At the scheduled time, a notification appears showing only the habit name as the title with no body text, no badge, and the default sound. Tapping it opens HabitX.
+result: pass
 
 ### 10. TodayView Empty State
 expected: Delete all habits (or test on a fresh install / after clearing data). Open the Today tab. Instead of a blank list, a centered prompt reads "No habits yet -- tap + to add your first one" (or similar action-oriented copy). The + button in the nav bar is still accessible.
@@ -77,10 +63,10 @@ result: pass
 ## Summary
 
 total: 12
-passed: 5
+passed: 12
 issues: 0
 pending: 0
-blocked: 7
+blocked: 0
 skipped: 0
 
 ## Gaps
