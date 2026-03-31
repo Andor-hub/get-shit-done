@@ -50,10 +50,10 @@
 
 ### Notifications
 
-- [ ] **NOTF-01**: User can set a per-habit daily reminder time
-- [ ] **NOTF-02**: Notification copy shows only the habit name (no coaching language)
-- [ ] **NOTF-03**: Notifications cancel automatically if the habit is already completed for the day
-- [ ] **NOTF-04**: App requests notification permission at a contextually appropriate moment (not on first launch)
+- [x] **NOTF-01**: User can set a per-habit daily reminder time
+- [x] **NOTF-02**: Notification copy shows only the habit name (no coaching language)
+- [x] **NOTF-03**: Notifications cancel automatically if the habit is already completed for the day
+- [x] **NOTF-04**: App requests notification permission at a contextually appropriate moment (not on first launch)
 
 ### Infrastructure
 
@@ -128,10 +128,10 @@
 | WID-03 | Phase 3 | Complete |
 | WID-04 | Phase 3 | Complete |
 | WID-05 | Phase 3 | Complete |
-| NOTF-01 | Phase 4 | Pending |
-| NOTF-02 | Phase 4 | Pending |
-| NOTF-03 | Phase 4 | Pending |
-| NOTF-04 | Phase 4 | Pending |
+| NOTF-01 | Phase 4 | Complete |
+| NOTF-02 | Phase 4 | Complete |
+| NOTF-03 | Phase 4 | Complete |
+| NOTF-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 33 total

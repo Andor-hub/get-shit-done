@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Completed 03-widgets/03-01-PLAN.md — AppIntent infrastructure, HabitSnapshot/HabitWidgetEntry types, habitx:// URL scheme, and widget target source paths"
-last_updated: "2026-03-30T23:17:07.068Z"
-last_activity: 2026-03-30
+stopped_at: Completed 04-notifications-polish/04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, TodayView empty state polish, TestFlight regression checklist
+last_updated: "2026-03-31T21:19:06.283Z"
+last_activity: 2026-03-31
 progress:
   total_phases: 4
-  completed_phases: 2
-  total_plans: 9
-  completed_plans: 7
+  completed_phases: 3
+  total_plans: 11
+  completed_plans: 10
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** Logging a habit is so frictionless — one tap from the home screen — that it becomes a reflex, not a chore.
-**Current focus:** Phase 03 — widgets
+**Current focus:** Phase 04 — notifications-polish
 
 ## Current Position
 
-Phase: 03 (widgets) — EXECUTING
-Plan: 2 of 3
+Phase: 04 (notifications-polish) — EXECUTING
+Plan: 2 of 2
 Status: Ready to execute
-Last activity: 2026-03-30
+Last activity: 2026-03-31
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -58,6 +58,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-core-app P03 | 8 | 1 tasks | 3 files |
 | Phase 02-core-app P04 | 10 | 2 tasks | 4 files |
 | Phase 03-widgets P01 | 12 | 2 tasks | 10 files |
+| Phase 04-notifications-polish P02 | 15 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,8 @@ Recent decisions affecting current work:
 - [Phase 02-core-app]: Color.appAccent used directly in Stats views — plan referenced HabitDefaults.appAccentColor but actual API is Color extension static let appAccent (established in 02-01)
 - [Phase 03-widgets]: static var -> static let for LocalizedStringResource in AppIntents — Swift 6 strict concurrency requires immutable global shared state
 - [Phase 03-widgets]: Build verification for iCloud-synced projects requires -derivedDataPath /tmp to avoid xattr resource fork codesign failures
+- [Phase 04-notifications-polish]: Each target requires a separate physical PrivacyInfo.xcprivacy file — sharing one path causes XcodeGen Multiple commands produce build error
+- [Phase 04-notifications-polish]: fileTypes xcprivacy buildPhase: resources override required in project.yml for correct Copy Bundle Resources placement
 
 ### Pending Todos
 
@@ -95,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-30T23:17:07.063Z
-Stopped at: Completed 03-widgets/03-01-PLAN.md — AppIntent infrastructure, HabitSnapshot/HabitWidgetEntry types, habitx:// URL scheme, and widget target source paths
+Last session: 2026-03-31T21:19:06.278Z
+Stopped at: Completed 04-notifications-polish/04-02-PLAN.md — PrivacyInfo.xcprivacy for both targets, TodayView empty state polish, TestFlight regression checklist
 Resume file: None
