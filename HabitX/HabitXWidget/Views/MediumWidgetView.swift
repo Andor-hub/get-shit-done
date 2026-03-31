@@ -27,7 +27,6 @@ struct MediumWidgetEntryView: View {
             }
         }
         .padding()
-        .containerBackground(.fill.tertiary, for: .widget)
     }
 
     @ViewBuilder

@@ -20,7 +20,6 @@ struct SmallWidgetEntryView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
     }
 
@@ -67,17 +66,14 @@ struct SmallWidgetEntryView: View {
                 content
             }
             .buttonStyle(.plain)
-            .containerBackground(.fill.tertiary, for: .widget)
         case .count:
             Button(intent: makeIncrementIntent(snapshot: snapshot)) {
                 content
             }
             .buttonStyle(.plain)
-            .containerBackground(.fill.tertiary, for: .widget)
         case .input:
             content
                 .widgetURL(URL(string: "habitx://log?id=\(snapshot.id.uuidString)")!)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
     }
 
