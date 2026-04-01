@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --postit-yellow: #fdfd96;
+            --postit-pink: #ffb6c1;
+            --postit-green: #98fb98;
+            --postit-blue: #add8e6;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Plain white background */
+            font-family: 'Caveat', cursive;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Phone Container */
+        .phone-frame {
+            width: 390px;
+            height: 844px; /* iPhone 14 Pro max size */
+            border: 14px solid #111;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            background-color: #fdfdfd;
+        }
+
+        .header {
+            padding: 40px 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px dashed #ccc;
+        }
+
+        .header h1 {
+            font-family: 'Kalam', cursive;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .stats-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .stats-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .board {
+            padding: 20px;
+            height: calc(100% - 160px);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .postit {
+            width: calc(100% - 40px);
+            min-height: 100px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: var(--postit-yellow);
+            box-shadow: 2px 4px 6px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            user-select: none;
+        }
+
+        .postit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 30px;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .postit.rot-left { transform: rotate(-2deg); }
+        .postit.rot-right { transform: rotate(1.5deg); }
+        .postit.rot-neutral { transform: rotate(0.5deg); }
+
+        .postit:hover {
+            transform: scale(1.02) rotate(0deg);
+            z-index: 10;
+            box-shadow: 5px 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .postit h2 {
+            font-size: 1.8rem;
+            margin: 0 0 10px;
+            line-height: 1.2;
+        }
+
+        .postit p {
+            font-size: 1.2rem;
+            margin: 0;
+            color: #555;
+        }
+
+        .postit.done {
+            opacity: 0.7;
+        }
+
+        .postit.done h2 {
+            text-decoration: line-through;
+            text-decoration-thickness: 3px;
+            color: #888;
+        }
+
+        .postit .checkmark {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(10deg);
+            font-size: 3rem;
+            color: #27ae60;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .postit.done .checkmark {
+            opacity: 1;
+            transform: translateY(-50%) rotate(-5deg) scale(1.2);
+        }
+
+        .fab {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 2.5rem;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
+            z-index: 100;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Modal */
+        .modal {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border: 3px solid #333;
+            border-radius: 10px;
+            width: 80%;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .modal h2 {
+            font-family: 'Kalam', cursive;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            border: none;
+            border-bottom: 2px dashed #aaa;
+            padding: 5px 0;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .color-btn.selected {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 10px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Stats View */
+        .stats-view {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: white;
+            z-index: 150;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .stats-view.active {
+            transform: translateX(0);
+        }
+
+        .stats-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 200px;
+            border: 3px solid #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            box-sizing: border-box;
+            gap: 10px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background-color: var(--postit-blue);
+            border-radius: 5px 5px 0 0;
+            transition: height 1s ease-out;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Tape effect */
+        .tape {
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 80px;
+            height: 25px;
+            z-index: 5;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="header">
+            <h1>HabitX</h1>
+            <button class="stats-btn" id="openStatsBtn">📊</button>
+        </div>
+
+        <div class="board" id="board">
+            <!-- Habits will be injected here -->
+        </div>
+
+        <button class="fab" id="addBtn">+</button>
+
+        <!-- Stats View -->
+        <div class="stats-view" id="statsView">
+            <div class="stats-header">
+                <button class="back-btn" id="closeStatsBtn">←</button>
+                <h1 style="font-family: 'Kalam'; margin: 0;">Weekly Progress</h1>
+            </div>
+            
+            <div class="chart-placeholder" id="chart">
+                <div class="chart-bar" style="height: 40%; background: var(--postit-pink);"></div>
+                <div class="chart-bar" style="height: 60%; background: var(--postit-yellow);"></div>
+                <div class="chart-bar" style="height: 30%; background: var(--postit-green);"></div>
+                <div class="chart-bar" style="height: 80%; background: var(--postit-blue);"></div>
+                <div class="chart-bar" style="height: 100%; background: var(--postit-pink);"></div>
+                <div class="chart-bar" style="height: 50%; background: var(--postit-yellow);"></div>
+                <div class="chart-bar" style="height: 70%; background: var(--postit-green);"></div>
+            </div>
+
+            <div class="postit rot-left" style="background: var(--postit-yellow);">
+                <div class="tape"></div>
+                <h2>Great Job!</h2>
+                <p>You completed 70% of your habits this week. Keep the streak alive! 🔥</p>
+            </div>
+        </div>
+
+        <!-- Add Habit Modal -->
+        <div class="modal" id="addModal">
+            <button class="close-modal" id="closeModalBtn">×</button>
+            <div class="modal-content">
+                <h2>New Habit</h2>
+                <div class="input-group">
+                    <input type="text" id="habitInput" placeholder="I want to..." autocomplete="off">
+                </div>
+                <div class="color-picker">
+                    <div class="color-btn selected" style="background: var(--postit-yellow);" data-color="--postit-yellow"></div>
+                    <div class="color-btn" style="background: var(--postit-pink);" data-color="--postit-pink"></div>
+                    <div class="color-btn" style="background: var(--postit-green);" data-color="--postit-green"></div>
+                    <div class="color-btn" style="background: var(--postit-blue);" data-color="--postit-blue"></div>
+                </div>
+                <button class="btn-add" id="saveHabitBtn">Stick It!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const initialHabits = [
+            { id: 1, text: "Drink 8 glasses of water", freq: "Daily", color: "--postit-blue", rot: "rot-left", done: false },
+            { id: 2, text: "Read 20 pages", freq: "Daily", color: "--postit-pink", rot: "rot-right", done: false },
+            { id: 3, text: "Workout 30 mins", freq: "Mon, Wed, Fri", color: "--postit-yellow", rot: "rot-neutral", done: true }
+        ];
+
+        let habits = [...initialHabits];
+        const board = document.getElementById('board');
+
+        function renderHabits() {
+            board.innerHTML = '';
+            habits.forEach(h => {
+                const el = document.createElement('div');
+                el.className = `postit ${h.rot} ${h.done ? 'done' : ''}`;
+                el.style.backgroundColor = `var(${h.color})`;
+                el.innerHTML = `
+                    <div class="tape"></div>
+                    <h2>${h.text}</h2>
+                    <p>${h.freq}</p>
+                    <div class="checkmark">✓</div>
+                `;
+                el.addEventListener('click', () => {
+                    h.done = !h.done;
+                    renderHabits();
+                });
+                board.appendChild(el);
+            });
+        }
+
+        renderHabits();
+
+        // Modal logic
+        const addBtn = document.getElementById('addBtn');
+        const addModal = document.getElementById('addModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const saveHabitBtn = document.getElementById('saveHabitBtn');
+        const habitInput = document.getElementById('habitInput');
+        
+        let selectedColor = '--postit-yellow';
+
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedColor = e.target.getAttribute('data-color');
+            });
+        });
+
+        addBtn.addEventListener('click', () => {
+            addModal.classList.add('active');
+            habitInput.focus();
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            addModal.classList.remove('active');
+        });
+
+        saveHabitBtn.addEventListener('click', () => {
+            if (habitInput.value.trim()) {
+                const rots = ['rot-left', 'rot-right', 'rot-neutral'];
+                habits.unshift({
+                    id: Date.now(),
+                    text: habitInput.value,
+                    freq: "Daily",
+                    color: selectedColor,
+                    rot: rots[Math.floor(Math.random() * rots.length)],
+                    done: false
+                });
+                renderHabits();
+                habitInput.value = '';
+                addModal.classList.remove('active');
+            }
+        });
+
+        // Stats View Logic
+        const statsView = document.getElementById('statsView');
+        const openStatsBtn = document.getElementById('openStatsBtn');
+        const closeStatsBtn = document.getElementById('closeStatsBtn');
+
+        openStatsBtn.addEventListener('click', () => {
+            statsView.classList.add('active');
+            // Animate chart bars on open
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                const h = bar.style.height;
+                bar.style.height = '0';
+                setTimeout(() => {
+                    bar.style.height = h;
+                }, 50);
+            });
+        });
+
+        closeStatsBtn.addEventListener('click', () => {
+            statsView.classList.remove('active');
+        });
+
+    </script>
+</body>
+</html>
