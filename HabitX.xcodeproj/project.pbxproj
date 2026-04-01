@@ -16,7 +16,6 @@
 		17C942000E6C2866378F5651 /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */; };
 		1AA3530FD86DD3FA506E9B2B /* HabitXWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC1AF864C49E76C428BA6F3 /* HabitXWidget.swift */; };
 		2A5CC0B282CFA0D33E0C9030 /* HabitLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA77FA7D6EA1C07160FADD20 /* HabitLogService.swift */; };
-		D4F8A1B2C3E5F678ABCDEF01 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F8A1B2C3E5F67890ABCDEF /* NotificationService.swift */; };
 		2B91D89C86FC789F8F9AC358 /* HabitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1FF70FC699CC6E70E4FAB /* HabitEntity.swift */; };
 		2C3159434E2B67255FEFE1F8 /* HabitSchemaV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */; };
 		2E9CDE850A18A9140BE8DA7C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277B5CAB7C0C322E00193D4A /* ContentView.swift */; };
@@ -47,6 +46,7 @@
 		C0A5EF9CE72707E221807C7E /* HabitMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */; };
 		D1E24C43D26E9490F45EC76C /* HabitStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */; };
 		D4EA5E9871044F0C30E25AA1 /* SmallWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1013B54DEAFA0A1DE8255C2 /* SmallWidgetProvider.swift */; };
+		D4F8A1B2C3E5F678ABCDEF01 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F8A1B2C3E5F67890ABCDEF /* NotificationService.swift */; };
 		DC8EAED056C4F800741A7089 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93D08DDDE390B8BFCBFD225 /* TodayView.swift */; };
 		E8E74BB6FD2E5BB0D495AB06 /* ToggleBooleanHabitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077CAC54D49A42D539EEBB1 /* ToggleBooleanHabitIntent.swift */; };
 		EAC618E7AC6D145213DAA69B /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */; };
@@ -88,7 +88,7 @@
 /* Begin PBXFileReference section */
 		0077CAC54D49A42D539EEBB1 /* ToggleBooleanHabitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleBooleanHabitIntent.swift; sourceTree = "<group>"; };
 		057D971A20FDEE0B9FA2E8E0 /* NumberInputSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputSheet.swift; sourceTree = "<group>"; };
-		072013B7DB9282FE8EA85CEF /* HabitXTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HabitXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		072013B7DB9282FE8EA85CEF /* HabitXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16F24E4583CF7098D2DE8E94 /* HabitSchemaV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSchemaV1.swift; sourceTree = "<group>"; };
 		1B98D973E2B9C24EA11A8803 /* HabitTemplatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTemplatePickerView.swift; sourceTree = "<group>"; };
 		25C3691E4E28B310F0ECF678 /* HabitWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetEntry.swift; sourceTree = "<group>"; };
@@ -98,11 +98,11 @@
 		562F5D95BFA5F4F4AAA1E0C2 /* StatsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculator.swift; sourceTree = "<group>"; };
 		5F1904820B0374945992C5D6 /* HabitMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMigrationPlan.swift; sourceTree = "<group>"; };
 		5F441D962BA0D882E5A5664D /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
-		62DD186929896A99F418A443 /* HabitX.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HabitX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		62DD186929896A99F418A443 /* HabitX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746393A4F4715D295E08A1FB /* CircularProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressRingView.swift; sourceTree = "<group>"; };
 		76258FDDEE7757CE2AFDBE9E /* HabitXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXApp.swift; sourceTree = "<group>"; };
 		79D79FF0CCD2DB03F3C65A02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7F75CC7B8CC8CF042BA10707 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7F75CC7B8CC8CF042BA10707 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81A9A1DADF67447687C71210 /* MediumWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetProvider.swift; sourceTree = "<group>"; };
 		8A454400766B5D4BD3F13353 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
 		8C19066C5CD5CC78C1F1E6A8 /* StatsCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculatorTests.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		9F319A4E4E97884DCF211DE0 /* HabitXWidgetEntitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitXWidgetEntitlements.entitlements; sourceTree = "<group>"; };
 		A93D08DDDE390B8BFCBFD225 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		AC828431483A9659CD71ED17 /* StatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsListView.swift; sourceTree = "<group>"; };
-		B2EB4A233807CE26F1664711 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B2EB4A233807CE26F1664711 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B33CC214DE25665506C85020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5C1FF70FC699CC6E70E4FAB /* HabitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEntity.swift; sourceTree = "<group>"; };
 		B7CB3D1C79BC5E0361BA52FF /* HabitStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatsView.swift; sourceTree = "<group>"; };
@@ -119,18 +119,18 @@
 		C63986F6D61BD9E4B461A168 /* HabitFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFormView.swift; sourceTree = "<group>"; };
 		C93D982A929CD09250C71727 /* HabitEntityQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEntityQuery.swift; sourceTree = "<group>"; };
 		CA77FA7D6EA1C07160FADD20 /* HabitLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogService.swift; sourceTree = "<group>"; };
-		D4F8A1B2C3E5F67890ABCDEF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CAD9C7C45E03E07FC445849F /* HabitHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHistoryView.swift; sourceTree = "<group>"; };
 		D1D6AE6D474A923BACCD7021 /* HabitWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetIntent.swift; sourceTree = "<group>"; };
 		D29EDB790C9A26F81CA409A4 /* IncrementCountHabitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementCountHabitIntent.swift; sourceTree = "<group>"; };
 		D316D5CDFB08B7BB3A427FEF /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
+		D4F8A1B2C3E5F67890ABCDEF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D6E23B8E98622A337CBA46C7 /* HabitDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDefaults.swift; sourceTree = "<group>"; };
 		E74E68BD52A2C78012F838DA /* TabRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRootView.swift; sourceTree = "<group>"; };
 		E7E21A73BF7D6DB18F894931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBC1AF864C49E76C428BA6F3 /* HabitXWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXWidget.swift; sourceTree = "<group>"; };
 		F1013B54DEAFA0A1DE8255C2 /* SmallWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetProvider.swift; sourceTree = "<group>"; };
 		F3312D4FD2A21BD6E957F574 /* HabitXWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitXWidgetBundle.swift; sourceTree = "<group>"; };
-		F397B4299497C72457793240 /* HabitXWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HabitXWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F397B4299497C72457793240 /* HabitXWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitXWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F597F0576D64FB8B9E8914CA /* HabitLogServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -401,8 +401,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1630;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4E4050CF720A62110C1C444F /* Build configuration list for PBXProject "HabitX" */;
 			developmentRegion = en;
@@ -531,11 +529,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VHGHKM4538;
 				INFOPLIST_FILE = HabitX/HabitX/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitX;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -610,12 +612,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VHGHKM4538;
 				INFOPLIST_FILE = HabitX/HabitXWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitXWidget;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -626,12 +632,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXWidget/HabitXWidgetEntitlements.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VHGHKM4538;
 				INFOPLIST_FILE = HabitX/HabitXWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitXWidget;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -643,6 +653,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXTests/HabitXTests.entitlements;
+				DEVELOPMENT_TEAM = VHGHKM4538;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -665,11 +676,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitX/HabitX.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VHGHKM4538;
 				INFOPLIST_FILE = HabitX/HabitX/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitX;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habitx.app;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -738,6 +753,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_ENTITLEMENTS = HabitX/HabitXTests/HabitXTests.entitlements;
+				DEVELOPMENT_TEAM = VHGHKM4538;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
